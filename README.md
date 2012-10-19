@@ -1,40 +1,30 @@
-# MATLAB HS12 – Research Plan (Template)
-(text between brackets to be removed)
+# MATLAB HS12 – Research Plan 
 
 > * Group Name: Don't Panic
-> * Group participants names: Benedek, Johannes Weinbuch
+> * Group participants names: Vartok Benedek, Weinbuch Johannes 
 > * Project Title: Simulating a panic on a cruise ship 
 
 ## General Introduction
 
-Last year was full with news about sinking ships, the most notable example being the Costa Concordia which ran aground near the Italian coast. We want to simulate the evacuation from a sinking ship with the purpose in seeing the influences of small exits, which are limited in capacity (i.e. rescue boats)
-(States your motivation clearly: why is it important / interesting to solve this problem?)
-(Add real-world examples, if any)
-(Put the problem into a historical context, from what does it originate? Are there already some proposed solutions?)
+Last year was full with news about sinking ships, the most notable example being the Costa Concordia which ran aground near the Italian coast. We want to simulate the evacuation from a sinking ship with the purpose in seeing the influences of small exits, which are limited in capacity (i.e. rescue boats).
 
 ## The Model
 
-independent variables: number of boats, capacity of one boat, number of passengers
+Our model is based on a hypothetical scenario. Because of a machine malfunction, an explosive gas accumulates in the ship and it cannot be blown out. So the ship has to be evacuated. To simplify the modelling, we will use the deck plans of the costa voyager (http://www.kreuzfahrtberater.de/deckplan.php?schiff=Costa+Voyager&bf&dpe=2) and only use the deck with the rescue boats. The passengers will enter it by the stairs.
 
-(Define dependent and independent variables you want to study. Say how you want to measure them.) (Why is your model a good abtraction of the problem you want to study?) (Are you capturing all the relevant aspects of the problem?)
-
+We want to study the effects of different distributions of passengers to the stairs to the boats, whereby the stairs can have different capacities. The influence of the total amount of passengers can be varied and the panic level, which is expressed by the average speed of a single passenger. At higher speeds of course, not all passengers can keep up. All these Variables will affect the time taken to get all passengers to boats.
 
 ## Fundamental Questions
 
-If there's a panic, can a similar disaster as the titanic happen, even if there are more boats now?
-
-(At the end of the project you want to find the answer to these questions)
-(Formulate a few, clear questions. Articulate them in sub-questions, from the more general to the more specific. )
-
+Which is the best strategy for evacuation concerning the choice of the way towards the rescue boats. Should all passengers dirstribute equally over the entries, or is there a better one? Also, which one takes longer: a high panic level on a nearly empty ship or a low panic level on a very full (overfull?) ship. What happens, if a boat suddenly is inoperable? How can the reaction be optimized?
 
 ## Expected Results
 
-No.
-
-(What are the answers to the above questions that you expect to find before starting your research?)
-
+On the distribution, we expect some similar law as in a parallel circuit of resistors. A low resistance means higher current. 
 
 ## References 
+
+- Original Deck plans
 
 (Add the bibliographic references you intend to use)
 (Explain possible extension to the above models)
