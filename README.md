@@ -20,24 +20,15 @@ Which is the best strategy for evacuation concerning the choice of the way towar
 
 ## Expected Results
 
-On the distribution, we expect some similar law as in a parallel circuit of resistors. A low resistance means higher current. 
+On the distribution, we expect some similar law as in a parallel circuit of resistors. A low resistance means higher current. Further, if the panic level gets too high, things should become unorganized and evacuation should take longer, if successful. If a boat is inoperable, we expect to see the other boats to be used more, but it will take time to propagate the change.
 
 ## References 
 
 - Original Deck plans
-
-(Add the bibliographic references you intend to use)
-(Explain possible extension to the above models)
-(Code / Projects Reports of the previous year)
-
+- Simulating dynamical features of escape panic (Dirk Helbing, Illes Farkas & Tamas Vicsek)
 
 ## Research Methods
 
 - Agent-Based Model
 
-(Cellular Automata, Agent-Based Model, Continuous Modeling...) (If you are not sure here: 1. Consult your colleagues, 2. ask the teachers, 3. remember that you can change it afterwards)
-
-
 ## Other
-
-(mention datasets you are going to use)
