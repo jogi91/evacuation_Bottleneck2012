@@ -33,6 +33,8 @@ On the distribution, we expect some similar law as in a parallel circuit of resi
 
 ## Research Methods
 
+- Agent-Based Model
+
 (Cellular Automata, Agent-Based Model, Continuous Modeling...) (If you are not sure here: 1. Consult your colleagues, 2. ask the teachers, 3. remember that you can change it afterwards)
 
 
