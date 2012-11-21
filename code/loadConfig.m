@@ -26,6 +26,9 @@ values(idx) = num2cell(v(idx));
 
 config = cell2struct(values, keynames);
 
+%Initialize Capacities
+config.spawnCounts = zeros(config.numberSpawnZones,1);
+config.exitCapacities = zeros(config.numberExits,1);
 
 % read the images
 for i=1:config.floor_count
@@ -34,19 +37,28 @@ for i=1:config.floor_count
     file = config.(sprintf('floor_%d_build', i));
     file_name = [config_path '/' file];
     img_build = imread(file_name);
+		[x,y] = size(img_build); %Get dimensions
+
     
     % decode images
 		%Walls, Colormapped to 0
     config.floor(i).img_wall = img_build==0;
 
 		%Spawn Zones, Colormapped from 2..numberSpawnZones+1
+		config.floor(i).spawnZone = zeros(config.numberSpawnZones, x, y);
+		config.floor(i)
 		for	j=2:config.numberSpawnZones+1
-			config.floor(i).spawnZone{j-1} = img_build==j; %Not sure, if thats a good idea: cellarray in struct in struct...
+			currentIndex = j-1; %Shift Index to start from 1
+			config.floor(i).spawnZone(currentIndex,:,:) = img_build==j; %Not sure, what's better: This or Array of cells... 
+			config.spawnCounts(currentIndex) = config.(sprintf('spawnCount%d', currentIndex)); % get each spawn count into an array
 		end
 
 		%Exits, The remaining part of the Colormap...
+		config.floor(i).exit = zeros(config.numberExits, x,y);
 		for j=config.numberSpawnZones+2:config.numberSpawnZones+2+config.numberExits-1
-			config.floor(i).exit{j-config.numberSpawnZones-1} = img_build==j; %Same as above, Not sure...
+			currentIndex = j-config.numberSpawnZones-1; % Index Shifting
+			config.floor(i).exit(currentIndex,:,:) = img_build==j; %Same as above, Not sure...
+			config.exitCapacities(currentIndex) = config.(sprintf('exitCapacity%d', currentIndex));
 		end
                                  
 end
