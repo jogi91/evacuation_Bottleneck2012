@@ -14,6 +14,8 @@ time = 0;
 
 %Initialize the environment
 
+config = loadConfig('../data/democonfig.conf')
+
 % Agents:
 % Each row consists of an x and y component.
 nAgents = 50;

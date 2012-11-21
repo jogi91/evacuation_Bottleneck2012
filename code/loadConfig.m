@@ -41,21 +41,13 @@ for i=1:config.floor_count
 
 		%Spawn Zones, Colormapped from 2..numberSpawnZones+1
 		for	j=2:config.numberSpawnZones+1
-			config.floor(i).spawnZone(j) = img_build==j;
+			config.floor(i).spawnZone{j-1} = img_build==j; %Not sure, if thats a good idea: cellarray in struct in struct...
 		end
 
 		%Exits, The remaining part of the Colormap...
 		for j=config.numberSpawnZones+2:config.numberSpawnZones+2+config.numberExits-1
-			config.floor(i).exit(j) = img_build==j;
+			config.floor(i).exit{j-config.numberSpawnZones-1} = img_build==j; %Same as above, Not sure...
 		end
                                  
-		%TODO: actualize...
-    %init the plot image here, because this won't change
-%    config.floor(i).img_plot = 5*config.floor(i).img_wall
-%        + 4*config.floor(i).img_stairs_up ...
-%        + 3*config.floor(i).img_stairs_down ...
-%        + 2*config.floor(i).img_exit ...
-%        + 1*config.floor(i).img_spawn;
-%    config.color_map = [1 1 1; 0.9 0.9 0.9; 0 1 0; 0.4 0.4 1; 1 0.4 0.4; 0 0 0];
 end
 
