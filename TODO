@@ -1,0 +1,4 @@
+- implement vector fields (to boats, and from walls, change when boat full)
+- agent structure in: data/democonfig.conf, placeAgents.m
+- floor in data.floor (or config.floor)
+- Look at Evacuation_with_custom_C_code
