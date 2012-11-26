@@ -26,9 +26,6 @@ values(idx) = num2cell(v(idx));
 
 config = cell2struct(values, keynames);
 
-%Initialize Capacities
-config.spawnCounts = zeros(config.numberSpawnZones,1);
-config.exitCapacities = zeros(config.numberExits,1);
 
 % read the images
 for i=1:config.floor_count
@@ -62,4 +59,3 @@ for i=1:config.floor_count
 		end
                                  
 end
-
