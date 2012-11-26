@@ -42,19 +42,19 @@ for i=1:config.floor_count
     config.floor(i).img_wall = img_build==0;
 
 		%Spawn Zones, Colormapped from 2..numberSpawnZones+1
-		config.floor(i).spawnZone = zeros(config.numberSpawnZones, x, y);
+		%config.floor(i).spawnZone = zeros(x, y);
 		config.floor(i)
 		for	j=2:config.numberSpawnZones+1
 			currentIndex = j-1; %Shift Index to start from 1
-			config.floor(i).spawnZone(currentIndex,:,:) = img_build==j; %Not sure, what's better: This or Array of cells... 
+			config.floor(i).spawnZone{currentIndex} = img_build==j; 
 			config.spawnCounts(currentIndex) = config.(sprintf('spawnCount%d', currentIndex)); % get each spawn count into an array
 		end
 
 		%Exits, The remaining part of the Colormap...
-		config.floor(i).exit = zeros(config.numberExits, x,y);
+		%config.floor(i).exit = zeros(config.numberExits, x,y);
 		for j=config.numberSpawnZones+2:config.numberSpawnZones+2+config.numberExits-1
 			currentIndex = j-config.numberSpawnZones-1; % Index Shifting
-			config.floor(i).exit(currentIndex,:,:) = img_build==j; %Same as above, Not sure...
+			config.floor(i).exit{currentIndex} = img_build==j; %Same as above, Not sure...
 			config.exitCapacities(currentIndex) = config.(sprintf('exitCapacity%d', currentIndex));
 		end
                                  

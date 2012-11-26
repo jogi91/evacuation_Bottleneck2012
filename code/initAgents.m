@@ -14,7 +14,7 @@ agentCounter = 0;
 for i=1:data.numberSpawnZones
 	for j=1:data.floor_count
 		%If theres a nonzero element in the spawnzone on the floor,
-		if nnz(data.floor(j).spawnZone(i,:,:)) > 0 
+		if nnz(data.floor(j).spawnZone{i}) > 0 
 			spawnZoneFloors(j) = 1; 
 			res = res + 1;
 		end
