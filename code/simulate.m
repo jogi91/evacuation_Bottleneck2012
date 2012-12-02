@@ -17,30 +17,24 @@ time = 0;
 config = loadConfig('../data/democonfig.conf');
 data = initialize(config);
 
-% Agents:
-% Each row consists of an x and y component.
-nAgents = 50;
-agentsPos = [10 * (rand(nAgents, 2) - 0.5)];
-agentsVel = [rand(nAgents, 2) - 0.5];
-
 targetVel = 0.2;
 
 %Simulation loop
 while(time<duration)
     % Calculate forces:
-    forces = repulsiveForces(agentsPos, agentsVel);
+    forces = repulsiveForces(data.agents.p, data.agents.v);
     % Go to center:
-    forces = forces - 0.01 * agentsPos;
+    forces = forces - 0.01 * data.agents.p;
     % Target velocity:
-    tmp = targetVel - sqrt(sum(agentsVel.^2,2));
-    forces = forces + 5 * tmp(:,ones(1,2)) .* agentsVel;
+    tmp = targetVel - sqrt(sum(data.agents.v.^2,2));
+    forces = forces + 5 * tmp(:,ones(1,2)) .* data.agents.v;
     
     % Progress agents with Leap-Frog integration:
-    agentsVel = agentsVel + dt * forces;
-    agentsPos = agentsPos + dt * agentsVel;
+    data.agents.v = data.agents.v + dt * forces;
+    data.agents.p = data.agents.p + dt * data.agents.v;
 
     % Plot agent positions:
-    plot(agentsPos(:,1), agentsPos(:,2), 'o');
+    plot(data.agents.p(:,1), data.agents.p(:,2), 'o');
     axis([-10, 10, -10, 10]);
     drawnow;
 

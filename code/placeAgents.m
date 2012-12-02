@@ -3,7 +3,7 @@ function data = placeAgents(data, agentCount, floorNumber, spawnZoneNumber)
 
 %get a random Radius
 function r = getRadius();
-r = data.r_min + (data.r_max-data.r_min)*rand(1);	
+    r = data.r_min + (data.r_max-data.r_min)*rand(1);	
 end
 
 
@@ -21,20 +21,24 @@ for i=(numAgents+1):numAgents+agentCount+1
 
 	%Where am I?
 
+    tries = 10;
 	while tries > 0
 	% randomly pick a spot and check if it's free
 		idx = randi(length(xSpots));
-		data.floor(floorNumber).agents(i).pos = [x(idx)*];
-		if checkForIntersection(data, i, cur_agent) == 0
-			tries = -1; % leave the loop
-		end
+		data.floor(floorNumber).agents(i).p = [xSpots(idx), ySpots(idx)];
+        
+% 		if checkForIntersection(data, i, cur_agent) == 0
+% 			tries = -1; % leave the loop
+% 		end
+        tries = -1;
+        
 		tries = tries - 1;
-		end
-		if tries > -1
-			%remove the last agent
-			data.floor(i).agents = data.floor(i).agents(1:end-1);
-		end
-	end
+    end
+
+    if tries > -1
+        %remove the last agent
+        data.floor(i).agents = data.floor(i).agents(1:end-1);
+    end
 
 	%Could the Agent be placed
 end

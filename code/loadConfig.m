@@ -43,7 +43,7 @@ for i=1:config.floor_count
 
 		%Spawn Zones, Colormapped from 2..numberSpawnZones+1
 		%config.floor(i).spawnZone = zeros(x, y);
-		config.floor(i)
+% 		config.floor(i)
 		for	j=2:config.numberSpawnZones+1
 			currentIndex = j-1; %Shift Index to start from 1
 			config.floor(i).spawnZone{currentIndex} = img_build==j; 
