@@ -5,8 +5,8 @@ data.agents = [];
 
 % TODO: Change in the future
 % For now, store all the agents' positions and velocities here:
-data.agents.p = 5 * 2 * (rand(config.spawnCounts, 2) - 0.5);
-data.agents.v = zeros(config.spawnCounts, 2);
+data.agents.p = 10 * rand(config.spawnCounts, 2);
+data.agents.v = rand(config.spawnCounts, 2) - 0.5;
 
 % % Stores the number of floors in which a spawn Zone type is present
 % spawnZoneFloors = zeros(data.floor_count,1);
