@@ -40,7 +40,7 @@ while(time<duration)
 
     % Plot agent positions:
     hold off;
-    pcolor(1 * config.floor.img_wall);
+    pcolor(1 * config.floor.wall);
     colormap([1 1 1; 0 0 0]);
     shading flat;
     hold on;

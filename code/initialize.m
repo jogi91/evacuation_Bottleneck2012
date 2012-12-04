@@ -15,8 +15,8 @@ data.exitCapacities = zeros(config.numberExits, 1);
 data = initAgents(config, data);
 
 % Calculate normalized wall distance gradients:
-walls = zeros(size(data.floor.img_wall));
-walls(data.floor.img_wall) = -1;
+walls = zeros(size(data.floor.wall));
+walls(data.floor.wall) = -1;
 data.floor.wall_dist = fastSweeping(walls) * data.meter_per_pixel;
 [data.floor.wall_dist_grad_x, data.floor.wall_dist_grad_y] = ...
     getNormalizedGradient(walls, data.floor.wall_dist - data.meter_per_pixel);
