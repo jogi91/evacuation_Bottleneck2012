@@ -2,7 +2,7 @@
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
 {
-    unsigned int m, n, i0, i1, j0, j1, idx00;
+    size_t m, n, i0, i1, j0, j1, idx00;
     double *data, *out, x, y, wx0, wy0, wx1, wy1;
     double d00, d01, d10, d11;
     
@@ -25,8 +25,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     
     x = x < 0 ? 0 : x > m - 1 ? m - 1 : x;
     y = y < 0 ? 0 : y > n - 1 ? n - 1 : y;
-    i0 = (unsigned int) x;
-    j0 = (unsigned int) y;
+    i0 = (size_t) x;
+    j0 = (size_t) y;
     i1 = i0 + 1;
     i1 = i1 > m - 1 ? m - 1 : i1;
     j1 = j0 + 1;

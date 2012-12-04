@@ -8,7 +8,7 @@ r = 0.3;      % agent radius
 k = 1e2;      % contact repulsion coefficient
 kappa = 1e2;  % sliding friction coefficient
 
-n = length(agentsPos);
+n = size(agentsPos, 1);
 forces = zeros(n, 2);
 
 for agentIdx = 1:n

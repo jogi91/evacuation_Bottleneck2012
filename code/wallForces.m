@@ -2,13 +2,13 @@ function F = wallForces(data)
 % Returns a matrix with a row per 2D agent force.
 
 % Constants (TODO: should be assigned per agent):
-A = 0.1;      % repulsion force factor
-B = 0.1;      % distance falloff factor
+A = 1e2;      % repulsion force factor
+B = 0.02;     % distance falloff factor
 r = 0.3;      % agent radius
 k = 1e2;      % contact repulsion coefficient
 kappa = 1e2;  % sliding friction coefficient
 
-n = length(data.agents.p);
+n = size(data.agents.p, 1);
 
 % Initialize output:
 F = zeros(n, 2);
@@ -19,15 +19,15 @@ for i=1:n
     v = data.agents.v(i, :);
 
     % Calculate wall normal vector:
-    nx = lerp2(data.floor.wall_dist_grad_x, p(1), p(2));
-    ny = lerp2(data.floor.wall_dist_grad_y, p(1), p(2));
+    ny = lerp2(data.floor.wall_dist_grad_x, p(2), p(1));
+    nx = lerp2(data.floor.wall_dist_grad_y, p(2), p(1));
     normal = [nx ny];
     
     % Calculate wall tangent vector:
     tangent = [-ny nx];
     
     % Calculate wall distance:
-    d = lerp2(data.floor.wall_dist, p(1), p(2));
+    d = lerp2(data.floor.wall_dist, p(2), p(1));
     
     F(i,:) = ...
              (A * exp((r-d)/B) + k * max(0, r-d)) * normal + ...
