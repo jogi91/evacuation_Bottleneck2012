@@ -1,46 +1,54 @@
-%Actually places the desired amount of agents in the right floor and spawnZone
-function data = placeAgents(data, agentCount, floorNumber, spawnZoneNumber)
+function data = placeAgents(data)
+% Try to place remaining agents in all spawning zones.
 
-%get a random Radius
+% Calculate a random agent radius:
 function r = getRadius();
     r = data.r_min + (data.r_max-data.r_min)*rand(1);	
 end
 
 
+% Get number of agents existing so far:
 numAgents = length(data.agents);
-[xSpots,ySpots] = find(data.floor(floorNumber).spawnZone{spawnZoneNumber} ==1); %where Can I place Agents
-%Convert to metric
-xSpots = xSpots*data.meter_per_pixel;
-ySpots = ySpots*data.meter_per_pixel;
 
-for i=(numAgents+1):numAgents+agentCount+1
-	data.floor(floorNumber).agents(i).r = getRadius; %How fat is the Agent?
-	data.floor(floorNumber).agents(i).v0 = data.v0; %How fast wants the Agent go?
-	data.floor(floorNumber).agents(i).f = [0 0]; % Use the Force, Luke!
-	data.floor(floorNumber).agents(i).v = [0 0]; %Run Forest, run!
-
-	%Where am I?
-
-    tries = 10;
-	while tries > 0
-	% randomly pick a spot and check if it's free
-		idx = randi(length(xSpots));
-		data.floor(floorNumber).agents(i).p = [xSpots(idx), ySpots(idx)];
+% Iterate through each of the spawn zones:
+for i = 1:data.numberSpawnZones
+    % Get pixel coordinates for spawning spots:
+    [xSpots,ySpots] = find(data.floor.spawnZone{i}==1);
+    % Convert to meters:
+    xSpots = xSpots * data.meter_per_pixel;
+    ySpots = ySpots * data.meter_per_pixel;
+    
+    % Try to place remaining number of agents for this spawn zone:
+    for j = 1:data.spawnCounts(i)
+        ai = numAgents + 1;  % new agent index
         
-% 		if checkForIntersection(data, i, cur_agent) == 0
-% 			tries = -1; % leave the loop
-% 		end
-        tries = -1;
-        
-		tries = tries - 1;
-    end
+        data.agents(ai).r = getRadius;
+        data.agents(ai).v0 = data.v0;
+        data.agents(ai).v = [0 0];  % velocity
+        data.agents(ai).f = [0 0];  % force
 
-    if tries > -1
-        %remove the last agent
-        data.floor(i).agents = data.floor(i).agents(1:end-1);
-    end
+        % Try to find an empty spot:
+        tries = 10;
+        while tries > 0
+            % Randomly pick a spot and check if it's free:
+            idx = randi(length(xSpots));
+            data.agents(ai).p = [xSpots(idx), ySpots(idx)];
 
-	%Could the Agent be placed
+%     		if checkForIntersection(data, i, cur_agent) == 0
+%     			tries = -1; % leave the loop
+%     		end
+            tries = -1;
+
+            tries = tries - 1;
+        end
+
+        if tries > -1
+            % If placement failed, remove the new agent
+            data.agents = data.agents(1:end-1);
+        else
+            numAgents = numAgents + 1;
+        end
+    end
 end
 
 end
