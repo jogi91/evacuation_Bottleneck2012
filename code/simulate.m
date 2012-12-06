@@ -4,7 +4,7 @@ function simulate(configFile)
 % They could be used, if no configFile was given as argument
 
 % Timestep (in seconds):
-dt = 0.1;
+dt = 0.01;
 duration = 120;
 time = 0;
 
