@@ -1,5 +1,6 @@
-- implement vector fields (to boats, and from walls, change when boat full)
+- fix desired vector fields
 - copy spawnCounts in config to spawnTotals, add exitCounts next to exitCapacities
+- add intersection checking at spawning
 
 - agent structure in: data/democonfig.conf, placeAgents.m
 - floor in data.floor (or config.floor)

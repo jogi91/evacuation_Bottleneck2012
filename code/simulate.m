@@ -19,6 +19,7 @@ targetVel = 0.5;
 it = 0;
 while(time<duration)
     % Calculate forces:
+    data = addDesiredForces(data);
     data = addInterAgentForces(data);
     data = addWallForces(data);
     
@@ -33,17 +34,33 @@ while(time<duration)
 %             forces(i) = f_max * forces(i) / norm(forces(i));
 %         end
 %     end
+
+    % Clip velocity:
+    for i = 1:size(data.agents)
+        av = data.agents(i).v;
+        avn = norm(av);
+        if(avn > data.v_max)
+            data.agents(i).v = v_max * av / avn;
+        end
+    end
     
     % Progress agents with Leap-Frog integration:
     for ai = 1:length(data.agents)
         data.agents(ai).v = data.agents(ai).v + dt * data.agents(ai).f;
+        
+        % Clip velocity:
+        avn = norm(data.agents(i).v);
+        if(avn > data.v_max)
+            data.agents(i).v = data.v_max * data.agents(i).v / avn;
+        end
+        
         data.agents(ai).p = data.agents(ai).p + dt * data.agents(ai).v;
         data.agents(ai).f = [0 0];
     end
 
     % Plot agent positions:
     hold off;
-    pcolor(1 * config.floor.wall);
+    imagesc(1 * config.floor.wall);
     colormap([1 1 1; 0 0 0]);
     shading flat;
     hold on;

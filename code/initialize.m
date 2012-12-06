@@ -14,9 +14,12 @@ mex 'lerp2.c';
 % Initialize agents:
 data = initAgents(config, data);
 
-% Calculate normalized wall distance gradients:
-walls = zeros(size(data.floor.wall));
-walls(data.floor.wall) = -1;
-data.floor.wall_dist = fastSweeping(walls) * data.meter_per_pixel;
+% Calculate wall force fields:
+boundary_data = zeros(size(data.floor.wall));
+boundary_data(data.floor.wall) = -1;
+data.floor.wall_dist = fastSweeping(boundary_data) * data.meter_per_pixel;
 [data.floor.wall_dist_grad_x, data.floor.wall_dist_grad_y] = ...
-    getNormalizedGradient(walls, data.floor.wall_dist - data.meter_per_pixel);
+    getNormalizedGradient(boundary_data, data.floor.wall_dist - data.meter_per_pixel);
+
+% Calculate exit force fields:
+data = createExitFields(data);
