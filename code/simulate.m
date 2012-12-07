@@ -4,15 +4,13 @@ function simulate(configFile)
 % They could be used, if no configFile was given as argument
 
 % Timestep (in seconds):
-dt = 0.01;
+dt = 0.05;
 duration = 120;
 time = 0;
 
 % Initialize the environment
 config = loadConfig('../data/democonfig.conf');
 data = initialize(config);
-
-targetVel = 0.5;
 
 
 % Simulation loop:
@@ -22,10 +20,6 @@ while(time<duration)
     data = addDesiredForces(data);
     data = addInterAgentForces(data);
     data = addWallForces(data);
-    
-    % Target velocity:
-%     tmp = targetVel - sqrt(sum(data.agents.v.^2,2));
-%     forces = forces + 5 * tmp(:,ones(1,2)) .* data.agents.v;
     
     % Clip force magnitude:
 %     forces(isnan(forces)) = 0;
