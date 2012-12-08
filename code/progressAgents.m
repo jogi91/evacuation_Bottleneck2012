@@ -43,6 +43,15 @@ for ai = 1:length(data.agents)
                                 round(newpos(1) / mpp))
             exited(ai) = true;
             data.exit_capacities(ei) = data.exit_capacities(ei) - 1;
+            
+            % Potentially update exits:
+            if data.exit_capacities(ei) == 0
+                if data.dfieldupdate_enable
+                    % TODO!
+                else
+                    data = createExitFields(data);
+                end
+            end
             break;
         end
     end
