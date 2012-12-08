@@ -12,6 +12,9 @@ data = initialize(config);
 time = 0;
 it = 0;
 while time < data.duration
+    % Possibly spawn new agents:
+    data = placeAgents(data);
+    
     % Calculate forces:
     data = addDesiredForces(data);
     data = addInterAgentForces(data);

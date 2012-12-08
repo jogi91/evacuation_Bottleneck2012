@@ -11,35 +11,36 @@ end
 numAgents = length(data.agents);
 
 % Iterate through each of the spawn zones:
-for i = 1:data.num_spawn_zones
+for si = 1:data.num_spawn_zones
     % Get pixel coordinates for spawning spots:
-    [xSpots,ySpots] = find(data.floor.spawn_zones{i}==1);
+    [ySpots,xSpots] = find(data.floor.spawn_zones{si}==1);
     % Convert to meters:
     xSpots = xSpots * data.meter_per_pixel;
     ySpots = ySpots * data.meter_per_pixel;
     
     % Try to place remaining number of agents for this spawn zone:
-    for j = 1:data.spawn_counts(i)
+    curSpawnCount = data.spawn_counts(si);
+    for j = 1:curSpawnCount
         ai = numAgents + 1;  % new agent index
         
-        data.agents(ai).r = getRadius;
+        data.agents(ai).r = getRadius();
         data.agents(ai).v0 = data.v0;
         data.agents(ai).v = [0 0];  % velocity
         data.agents(ai).f = [0 0];  % force
 
         % Try to find an empty spot:
-        tries = 10;
+        tries = 5;
         while tries > 0
             % Randomly pick a spot and check if it's free:
             idx = randi(length(xSpots));
             data.agents(ai).p = [xSpots(idx), ySpots(idx)];
 
-            % TODO: Check for intersections here:
-%     		if checkForIntersection(data, i, cur_agent) == 0
-%     			tries = -1; % leave the loop
-%     		end
-            tries = -1;
+            % Check for agent intersections:
+    		if checkForIntersection(data, ai) == 0
+    			tries = -1;  % leave the loop
+            end
 
+            % Agent was intersecting; try again or give up.
             tries = tries - 1;
         end
 
@@ -48,9 +49,9 @@ for i = 1:data.num_spawn_zones
             data.agents = data.agents(1:end-1);
         else
             numAgents = numAgents + 1;
+            % Decrease spawn count for this zone:
+            data.spawn_counts(si) = data.spawn_counts(si) - 1;
         end
-        
-        % TODO: Decrease spawn count
     end
 end
 
