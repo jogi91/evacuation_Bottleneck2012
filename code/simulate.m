@@ -1,10 +1,11 @@
 function simulate(configFile)
-% Get the Initial Values from a config file
-% For now, they are still hard coded for simplicity
-% They could be used, if no configFile was given as argument
 
-% Initialize the environment
-config = loadConfig('../data/democonfig.conf');
+% Initialize the environment from config file:
+if nargin == 1
+    config = loadConfig(configFile);
+else
+    config = loadConfig('../data/democonfig.conf');
+end
 data = initialize(config);
 
 
