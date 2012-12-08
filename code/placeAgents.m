@@ -13,7 +13,7 @@ numAgents = length(data.agents);
 % Iterate through each of the spawn zones:
 for i = 1:data.numberSpawnZones
     % Get pixel coordinates for spawning spots:
-    [xSpots,ySpots] = find(data.floor.spawnZone{i}==1);
+    [xSpots,ySpots] = find(data.floor.spawnZones{i}==1);
     % Convert to meters:
     xSpots = xSpots * data.meter_per_pixel;
     ySpots = ySpots * data.meter_per_pixel;

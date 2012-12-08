@@ -5,10 +5,10 @@ function data = createExitFields(data)
 boundary_data = zeros(size(data.floor.wall));
 boundary_data(data.floor.wall) = 1;
 
-for i = 1:length(data.floor.exit)
+for i = 1:length(data.floor.exits)
     % Check if exit has been filled:
     if data.exitCapacities(i) > 0
-        boundary_data(data.floor.exit{i}) = -1;
+        boundary_data(data.floor.exits{i}) = -1;
     end
 end
 

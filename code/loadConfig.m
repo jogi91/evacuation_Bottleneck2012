@@ -46,7 +46,7 @@ config.floor.wall = img_build==0;
 for	j=2:config.numberSpawnZones+1
     currentIndex = j-1; %Shift Index to start from 1
 
-    config.floor.spawnZone{currentIndex} = img_build==j;
+    config.floor.spawnZones{currentIndex} = img_build==j;
     
     % Get each spawn count into an array:
     config.spawnCounts(currentIndex) = config.(sprintf('spawnCount%d', currentIndex));
@@ -57,6 +57,6 @@ end
 for j=config.numberSpawnZones+2:config.numberSpawnZones+2+config.numberExits-1
     currentIndex = j-config.numberSpawnZones-1; % Index Shifting
 
-    config.floor.exit{currentIndex} = img_build==j; %Same as above, Not sure...
+    config.floor.exits{currentIndex} = img_build==j; %Same as above, Not sure...
     config.exitCapacities(currentIndex) = config.(sprintf('exitCapacity%d', currentIndex));
 end
