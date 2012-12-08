@@ -15,6 +15,9 @@ while time < data.duration
     % Possibly spawn new agents:
     data = placeAgents(data);
     
+    % Update desired vector fields:
+    data = progressDestFields(data);
+    
     % Calculate forces:
     data = addDesiredForces(data);
     data = addInterAgentForces(data);

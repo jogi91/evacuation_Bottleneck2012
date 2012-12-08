@@ -27,9 +27,9 @@ for ai = 1:length(data.agents)
 
     newpos = data.agents(ai).p + data.dt * data.agents(ai).v;
     % Restrict position to floor:
-    if any(isnan(newpos)); newpos = [0,0]; end
-    if newpos(1) < mpp; newpos(1) = mpp; end
-    if newpos(2) < mpp; newpos(2) = mpp; end
+    if any(isnan(newpos)); newpos    = [0,0];  end
+    if newpos(1) < mpp;    newpos(1) = mpp;    end
+    if newpos(2) < mpp;    newpos(2) = mpp;    end
     if newpos(1) > floorW; newpos(1) = floorW; end
     if newpos(2) > floorH; newpos(2) = floorH; end
     
@@ -46,12 +46,23 @@ for ai = 1:length(data.agents)
             exited(ai) = true;
             data.exit_capacities(ei) = data.exit_capacities(ei) - 1;
             
-            % Potentially update exits:
+            % Update exits and desired vector fields:
             if data.exit_capacities(ei) == 0
+                data = createExitFields(data);
+                
                 if data.dfieldupdate_enable
-                    % TODO!
+                    % Add current exit to list of filled ones:
+                    numFull = length(data.floor.dfieldupdate_full_exits) + 1;
+                    data.floor.dfieldupdate_full_exits(numFull) = ei;
+                    data.floor.dfieldupdate_dir_x{numFull} = ...
+                         data.floor.dir_new_x;
+                    data.floor.dfieldupdate_dir_y{numFull} = ...
+                         data.floor.dir_new_y;
                 else
-                    data = createExitFields(data);
+                    % If fancy circular updating is disabled, update the
+                    % entire field immediately:
+                    data.floor.dir_x = data.floor.dir_new_x;
+                    data.floor.dir_y = data.floor.dir_new_y;
                 end
             end
             break;

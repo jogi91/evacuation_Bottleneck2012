@@ -2,7 +2,7 @@ function plotFloor(data)
 % Draws the floor layout with the agents.
 
 hold off;
-imagesc(1 * data.floor.wall);
+imagesc(data.floor.wall);
 colormap([1 1 1; 0 0 0]);
 shading flat;
 hold on;

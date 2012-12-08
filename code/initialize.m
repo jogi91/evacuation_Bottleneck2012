@@ -19,3 +19,18 @@ data.floor.wall_dist = fastSweeping(boundary_data) * data.meter_per_pixel;
 
 % Calculate exit force fields:
 data = createExitFields(data);
+data.floor.dir_x = data.floor.dir_new_x;
+data.floor.dir_y = data.floor.dir_new_y;
+
+% Calculate middle points of exits in pixels and
+% initialize destination field update progresses:
+for ei = 1:length(data.floor.exits)
+    [rs cs] = find(data.floor.exits{ei});
+    n = length(rs);
+    data.floor.exit_midpoints{ei} = [sum(rs) sum(cs)] / n;
+    
+    data.floor.dfieldupdate_cur_radii(ei) = 0;
+end
+data.floor.dfieldupdate_full_exits = [];
+data.floor.dfieldupdate_dir_x = [];
+data.floor.dfieldupdate_dir_y = [];
