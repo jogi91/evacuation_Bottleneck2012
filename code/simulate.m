@@ -52,19 +52,8 @@ while(time<duration)
         data.agents(ai).f = [0 0];
     end
 
-    % Plot agent positions:
-    hold off;
-    imagesc(1 * config.floor.wall);
-    colormap([1 1 1; 0 0 0]);
-    shading flat;
-    hold on;
-    
-    for ai = 1:length(data.agents)
-        plot(data.agents(ai).p(:,1) / config.meter_per_pixel, ...
-             data.agents(ai).p(:,2) / config.meter_per_pixel, 'o');
-    end
-    
-    drawnow;
+    % Draw floor and agents:
+    plotFloor(data);
     
 	time = time + dt;
     it = it + 1;
