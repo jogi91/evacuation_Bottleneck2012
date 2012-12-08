@@ -3,19 +3,15 @@ function simulate(configFile)
 % For now, they are still hard coded for simplicity
 % They could be used, if no configFile was given as argument
 
-% Timestep (in seconds):
-dt = 0.05;
-duration = 120;
-time = 0;
-
 % Initialize the environment
 config = loadConfig('../data/democonfig.conf');
 data = initialize(config);
 
 
 % Simulation loop:
+time = 0;
 it = 0;
-while(time<duration)
+while time < data.duration
     % Calculate forces:
     data = addDesiredForces(data);
     data = addInterAgentForces(data);
@@ -28,33 +24,13 @@ while(time<duration)
 %             forces(i) = f_max * forces(i) / norm(forces(i));
 %         end
 %     end
-
-    % Clip velocity:
-    for i = 1:size(data.agents)
-        av = data.agents(i).v;
-        avn = norm(av);
-        if(avn > data.v_max)
-            data.agents(i).v = v_max * av / avn;
-        end
-    end
     
-    % Progress agents with Leap-Frog integration:
-    for ai = 1:length(data.agents)
-        data.agents(ai).v = data.agents(ai).v + dt * data.agents(ai).f;
-        
-        % Clip velocity:
-        avn = norm(data.agents(i).v);
-        if(avn > data.v_max)
-            data.agents(i).v = data.v_max * data.agents(i).v / avn;
-        end
-        
-        data.agents(ai).p = data.agents(ai).p + dt * data.agents(ai).v;
-        data.agents(ai).f = [0 0];
-    end
+    % Progress agents:
+    data = progressAgents(data);
 
     % Draw floor and agents:
     plotFloor(data);
     
-	time = time + dt;
+	time = time + data.dt;
     it = it + 1;
 end

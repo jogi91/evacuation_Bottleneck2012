@@ -1,6 +1,4 @@
 - copy spawnCounts in config to spawnTotals, add exitCounts next to exitCapacities
 - add intersection checking at spawning
-
-- agent structure in: data/democonfig.conf, placeAgents.m
-- floor in data.floor (or config.floor)
-- Look at Evacuation_with_custom_C_code
+- implement different updates of desired vector fields after closing exit
+- do output (images, graphs, videos)
