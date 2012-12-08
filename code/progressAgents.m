@@ -15,7 +15,9 @@ floorH = size(data.floor.img_build, 1) * mpp;
 
 % Progress agents with Leap-Frog integration:
 for ai = 1:length(data.agents)
-    data.agents(ai).v = data.agents(ai).v + data.dt * data.agents(ai).f;
+    % Calculate new velocity:
+    data.agents(ai).v = data.agents(ai).v + data.dt * data.agents(ai).f / ...
+                                            data.m;
 
     % Clip velocity:
     avn = norm(data.agents(ai).v);
