@@ -41,22 +41,20 @@ config.floor.img_build = img_build;
 % Walls, Colormapped to 0
 config.floor.wall = img_build==0;
 
-%Spawn Zones, Colormapped from 2..numberSpawnZones+1
-%config.floor.spawnZone = zeros(x, y);
-for	j=2:config.numberSpawnZones+1
+%Spawn Zones, Colormapped from 2..num_spawn_zones+1
+for	j=2:config.num_spawn_zones+1
     currentIndex = j-1; %Shift Index to start from 1
 
-    config.floor.spawnZones{currentIndex} = img_build==j;
+    config.floor.spawn_zones{currentIndex} = img_build==j;
     
     % Get each spawn count into an array:
-    config.spawnCounts(currentIndex) = config.(sprintf('spawnCount%d', currentIndex));
+    config.spawn_counts(currentIndex) = config.(sprintf('spawn_count_%d', currentIndex));
 end
 
 % Exits, The remaining part of the colormap
-% config.floor.exit = zeros(config.numberExits, x,y);
-for j=config.numberSpawnZones+2:config.numberSpawnZones+2+config.numberExits-1
-    currentIndex = j-config.numberSpawnZones-1; % Index Shifting
+for j=config.num_spawn_zones+2:config.num_spawn_zones+2+config.num_exits-1
+    currentIndex = j-config.num_spawn_zones-1; % Index Shifting
 
     config.floor.exits{currentIndex} = img_build==j; %Same as above, Not sure...
-    config.exitCapacities(currentIndex) = config.(sprintf('exitCapacity%d', currentIndex));
+    config.exit_capacities(currentIndex) = config.(sprintf('exit_capacity_%d', currentIndex));
 end

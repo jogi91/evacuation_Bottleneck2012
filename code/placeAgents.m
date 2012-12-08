@@ -2,7 +2,7 @@ function data = placeAgents(data)
 % Try to place remaining agents in all spawning zones.
 
 % Calculate a random agent radius:
-function r = getRadius();
+function r = getRadius()
     r = data.r_min + (data.r_max-data.r_min)*rand(1);	
 end
 
@@ -11,15 +11,15 @@ end
 numAgents = length(data.agents);
 
 % Iterate through each of the spawn zones:
-for i = 1:data.numberSpawnZones
+for i = 1:data.num_spawn_zones
     % Get pixel coordinates for spawning spots:
-    [xSpots,ySpots] = find(data.floor.spawnZones{i}==1);
+    [xSpots,ySpots] = find(data.floor.spawn_zones{i}==1);
     % Convert to meters:
     xSpots = xSpots * data.meter_per_pixel;
     ySpots = ySpots * data.meter_per_pixel;
     
     % Try to place remaining number of agents for this spawn zone:
-    for j = 1:data.spawnCounts(i)
+    for j = 1:data.spawn_counts(i)
         ai = numAgents + 1;  % new agent index
         
         data.agents(ai).r = getRadius;
@@ -34,6 +34,7 @@ for i = 1:data.numberSpawnZones
             idx = randi(length(xSpots));
             data.agents(ai).p = [xSpots(idx), ySpots(idx)];
 
+            % TODO: Check for intersections here:
 %     		if checkForIntersection(data, i, cur_agent) == 0
 %     			tries = -1; % leave the loop
 %     		end
@@ -48,6 +49,8 @@ for i = 1:data.numberSpawnZones
         else
             numAgents = numAgents + 1;
         end
+        
+        % TODO: Decrease spawn count
     end
 end
 

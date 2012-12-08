@@ -13,9 +13,7 @@ x = cos(t);
 y = sin(t);
 
 for ai = 1:length(data.agents)
-%     plot(data.agents(ai).p(:,1) / config.meter_per_pixel, ...
-%          data.agents(ai).p(:,2) / config.meter_per_pixel, 'o');
-    % Draw an agent as a circle with the right middle point and radius:
+    % Draw an agent as a circle with his middle point and radius:
     x0 = data.agents(ai).p(1);
     y0 = data.agents(ai).p(2);
     r  = data.agents(ai).r;

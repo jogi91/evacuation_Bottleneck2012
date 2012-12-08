@@ -7,10 +7,6 @@ mex 'fastSweeping.c';
 mex 'getNormalizedGradient.c';
 mex 'lerp2.c';
 
-% Initialize capacities:
-% data.spawnCounts = zeros(config.numberSpawnZones, 1);
-% data.exitCapacities = zeros(config.numberExits, 1);
-
 % Initialize agents:
 data = initAgents(config, data);
 

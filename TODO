@@ -2,3 +2,4 @@
 - add intersection checking at spawning
 - implement different updates of desired vector fields after closing exit
 - do output (images, graphs, videos)
+- implement spawning over time

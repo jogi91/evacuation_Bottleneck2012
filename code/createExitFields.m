@@ -7,7 +7,7 @@ boundary_data(data.floor.wall) = 1;
 
 for i = 1:length(data.floor.exits)
     % Check if exit has been filled:
-    if data.exitCapacities(i) > 0
+    if data.exit_capacities(i) > 0
         boundary_data(data.floor.exits{i}) = -1;
     end
 end

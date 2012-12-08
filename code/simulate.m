@@ -17,14 +17,6 @@ while time < data.duration
     data = addInterAgentForces(data);
     data = addWallForces(data);
     
-    % Clip force magnitude:
-%     forces(isnan(forces)) = 0;
-%     for i = 1:size(forces,1)
-%         if norm(forces(i)) > f_max
-%             forces(i) = f_max * forces(i) / norm(forces(i));
-%         end
-%     end
-    
     % Progress agents:
     data = progressAgents(data);
 

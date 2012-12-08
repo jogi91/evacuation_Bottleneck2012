@@ -38,11 +38,11 @@ for ai = 1:length(data.agents)
     
     % Check for exiting:
     for ei = 1:length(data.floor.exits)
-        if data.exitCapacities(ei) > 0 && ...
+        if data.exit_capacities(ei) > 0 && ...
            data.floor.exits{ei}(round(newpos(2) / mpp), ...
                                 round(newpos(1) / mpp))
             exited(ai) = true;
-            data.exitCapacities(ei) = data.exitCapacities(ei) - 1;
+            data.exit_capacities(ei) = data.exit_capacities(ei) - 1;
             break;
         end
     end
