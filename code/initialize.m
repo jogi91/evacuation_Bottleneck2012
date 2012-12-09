@@ -40,3 +40,6 @@ data.floor.dfieldupdate_dir_y = [];
 % Maximum distance for influence of agents on each other:
 data.r_influence = ...
     fzero(@(r) data.A * exp((2*data.r_max-r)/data.B) - 1e-4, data.r_max);
+
+% Initialize exit statistics:
+data.agents_exited = zeros(1, data.num_exits);

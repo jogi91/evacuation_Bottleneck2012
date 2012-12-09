@@ -31,6 +31,7 @@ while time < data.duration
 
     % Draw floor and agents:
     plotFloor(data);
+    data.agents_exited
     
 	time = time + data.dt;
     it = it + 1;

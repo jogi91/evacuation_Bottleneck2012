@@ -69,6 +69,7 @@ for ai = 1:length(data.agents)
                                 round(newpos(1) / mpp))
             exited(ai) = true;
             data.exit_capacities(ei) = data.exit_capacities(ei) - 1;
+            data.agents_exited(ei) = data.agents_exited(ei) + 1;
             
             % Update exits and desired vector fields:
             if data.exit_capacities(ei) == 0
