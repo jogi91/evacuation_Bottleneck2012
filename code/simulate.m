@@ -11,7 +11,7 @@ data = initialize(config);
 % Simulation loop:
 time = 0;
 it = 0;
-while time < data.duration
+while length(data.agents) > 0 || time < 2
 %     tic;
     
     % Possibly spawn new agents:
@@ -31,8 +31,16 @@ while time < data.duration
     % Draw floor and agents:
     plotFloor(data);
     
+    % Collect statistics:
+    data.agents_exited_time_series = ...
+        [data.agents_exited_time_series; time, data.agents_exited];
+    
 	time = time + data.dt;
     it = it + 1;
     
 %     toc
 end
+
+data.finish_time = time;
+
+plotExitedAgents(config, data);

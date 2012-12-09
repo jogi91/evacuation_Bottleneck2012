@@ -46,3 +46,4 @@ data.r_influence = ...
 
 % Initialize exit statistics:
 data.agents_exited = zeros(1, data.num_exits);
+data.agents_exited_time_series = [];
