@@ -8,7 +8,6 @@ else
 end
 data = initialize(config);
 
-
 % Simulation loop:
 time = 0;
 it = 0;
@@ -31,7 +30,6 @@ while time < data.duration
 
     % Draw floor and agents:
     plotFloor(data);
-    data.agents_exited
     
 	time = time + data.dt;
     it = it + 1;

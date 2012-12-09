@@ -9,6 +9,9 @@ mex 'getNormalizedGradient.c';
 mex 'lerp2.c';
 mex 'rangeQuery.c';
 
+% Seed random number generator:
+rng(data.rseed);
+
 % Initialize agents:
 data = initAgents(config, data);
 
