@@ -4,17 +4,20 @@ function data = progressDestFields(data)
 
 if ~data.dfieldupdate_enable; return; end
 
+% Get size of layout in pixels:
+floorSize = size(data.floor.img_build);
+
 for fei = 1:length(data.floor.dfieldupdate_full_exits)
     ei = data.floor.dfieldupdate_full_exits(fei);
-    if data.exit_capacities(ei) == 0
+    curRadius = data.floor.dfieldupdate_cur_radii(ei);
+    if data.exit_capacities(ei) == 0 && curRadius < max(floorSize)
         % Grow circle (all units in pixels):
-        newRadius = data.floor.dfieldupdate_cur_radii(ei) + ...
+        newRadius = curRadius + ...
             data.dt * data.dfieldupdate_speed / data.meter_per_pixel;
             
         data.floor.dfieldupdate_cur_radii(ei) = newRadius;
         
         % Generate a corresponding circular mask:
-        floorSize = size(data.floor.img_build);
         [rs cs] = meshgrid(1:floorSize(1), 1:floorSize(2));
         r0 = data.floor.exit_midpoints{ei}(1);
         c0 = data.floor.exit_midpoints{ei}(2);

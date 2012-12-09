@@ -15,17 +15,25 @@ floorH = size(data.floor.img_build, 1) * mpp;
 
 % Progress agents with Leap-Frog integration:
 for ai = 1:length(data.agents)
+    % Clip force:
+    afn = norm(data.agents(ai).f);
+    if(afn > data.f_max)
+        data.agents(ai).f = data.f_max * data.agents(ai).f / afn;
+    end
+    
     % Calculate new velocity:
-    data.agents(ai).v = data.agents(ai).v + data.dt * data.agents(ai).f / ...
-                                            data.m;
+    newvel = data.agents(ai).v + data.dt * data.agents(ai).f / ...
+                                 data.m;
 
     % Clip velocity:
-    avn = norm(data.agents(ai).v);
+    avn = norm(newvel);
     if(avn > data.v_max)
-        data.agents(ai).v = data.v_max * data.agents(ai).v / avn;
+        newvel = data.v_max * newvel / avn;
     end
 
-    newpos = data.agents(ai).p + data.dt * data.agents(ai).v;
+    % Calculate new position:
+    oldpos = data.agents(ai).p;
+    newpos = oldpos + data.dt * newvel;
     % Restrict position to floor:
     if any(isnan(newpos)); newpos    = [0,0];  end
     if newpos(1) < mpp;    newpos(1) = mpp;    end
@@ -33,6 +41,22 @@ for ai = 1:length(data.agents)
     if newpos(1) > floorW; newpos(1) = floorW; end
     if newpos(2) > floorH; newpos(2) = floorH; end
     
+    % If agent got into a wall, move him out:
+%     wdepth = data.agents(ai).r - lerp2(data.floor.wall_dist, newpos(2), newpos(1));
+%     if wdepth > 0
+%         % Calculate wall normal vector:
+%         ny = lerp2(data.floor.wall_dist_grad_x, oldpos(2), oldpos(1));
+%         nx = lerp2(data.floor.wall_dist_grad_y, oldpos(2), oldpos(1));
+%         normal = [nx ny];
+%         
+%         % Remove perpendicular velocity component:
+% %         newvel = newvel - dot(normal, newvel) / dot(normal,normal) * normal;
+%         % Move him out:
+%         newpos = newpos + normal * wdepth;
+%     end
+    
+    % Apply new state:
+    data.agents(ai).v = newvel;
     data.agents(ai).p = newpos;
     
     % Reset force:

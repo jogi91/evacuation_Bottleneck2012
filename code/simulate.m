@@ -13,7 +13,7 @@ data = initialize(config);
 time = 0;
 it = 0;
 while time < data.duration
-    tic;
+%     tic;
     
     % Possibly spawn new agents:
     data = placeAgents(data);
@@ -30,10 +30,10 @@ while time < data.duration
     data = progressAgents(data);
 
     % Draw floor and agents:
-%     plotFloor(data);
+    plotFloor(data);
     
 	time = time + data.dt;
     it = it + 1;
     
-    toc
+%     toc
 end
