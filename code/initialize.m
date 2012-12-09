@@ -3,9 +3,11 @@ function data = initialize(config)
 data = config;
 
 % Compile C functions:
+mex 'createRangeTree.c';
 mex 'fastSweeping.c';
 mex 'getNormalizedGradient.c';
 mex 'lerp2.c';
+mex 'rangeQuery.c';
 
 % Initialize agents:
 data = initAgents(config, data);
@@ -34,3 +36,7 @@ end
 data.floor.dfieldupdate_full_exits = [];
 data.floor.dfieldupdate_dir_x = [];
 data.floor.dfieldupdate_dir_y = [];
+
+% Maximum distance for influence of agents on each other:
+data.r_influence = ...
+    fzero(@(r) data.A * exp((2*data.r_max-r)/data.B) - 1e-4, data.r_max);

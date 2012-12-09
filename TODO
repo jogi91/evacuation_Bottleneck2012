@@ -1,3 +1,2 @@
-- implement different updates of desired vector fields after closing exit
 - do output (images, graphs, videos)
 - optimize (agent-agent forces -> range tree)
