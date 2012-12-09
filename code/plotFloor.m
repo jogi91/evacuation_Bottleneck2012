@@ -4,7 +4,7 @@ function plotFloor(data)
 hold off;
 imagesc(data.floor.wall);
 colormap([1 1 1; 0 0 0]);
-shading flat;
+axis equal;
 hold on;
 
 % Prepare circle data for drawing:
