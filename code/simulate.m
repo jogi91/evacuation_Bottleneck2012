@@ -30,6 +30,10 @@ while length(data.agents) > 0 || time < 2
 
     % Draw floor and agents:
     plotFloor(data);
+    if data.save_frames
+        print('-dpng', sprintf('frames/%s_%05i.png', ...
+            data.frame_basename, it));
+    end
     
     % Collect statistics:
     data.agents_exited_time_series = ...

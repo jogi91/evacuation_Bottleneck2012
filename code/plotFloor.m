@@ -5,6 +5,7 @@ hold off;
 imagesc(data.floor.wall);
 colormap([1 1 1; 0 0 0]);
 axis equal;
+axis off;
 hold on;
 
 % Prepare circle data for drawing:

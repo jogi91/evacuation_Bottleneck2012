@@ -13,4 +13,6 @@ for i = 1 : data.num_exits
     title(sprintf('Agents on boat %i', i));
 end
 
+print('-depsc2', sprintf('frames/%s_exit_occupation.eps', data.frame_basename));
+
 end
