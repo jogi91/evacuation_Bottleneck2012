@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.31)  10 DEC 2012 15:50
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.10.31)  10 DEC 2012 17:27
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -352,14 +352,14 @@ Package epstopdf Info: Source file: <ETHlogo.eps>
 (epstopdf)                    date: 2012-10-15 18:38:57
 (epstopdf)                    size: 179075 bytes
 (epstopdf)             Output file: <ETHlogo-eps-converted-to.pdf>
-(epstopdf)                    date: 2012-12-09 15:50:11
+(epstopdf)                    date: 2012-12-10 17:12:54
 (epstopdf)                    size: 14343 bytes
 (epstopdf)             Command: <epstopdf --outfile=ETHlogo-eps-converted-to.pd
 f ETHlogo.eps>
 (epstopdf)             \includegraphics on input line 5.
 Package epstopdf Info: Output file is already uptodate.
 
-<ETHlogo-eps-converted-to.pdf, id=39, 179.67125pt x 45.16875pt>
+<ETHlogo-eps-converted-to.pdf, id=47, 179.67125pt x 45.16875pt>
 File: ETHlogo-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ETHlogo-eps-converted-to.pdf>
@@ -385,32 +385,35 @@ Overfull \hbox (5.3226pt too wide) in paragraph at lines 43--61
 \openout4 = `reportTemplate.toc'.
 
  [3] [4]
-<images/gimp.png, id=84, 501.875pt x 225.84375pt>
+<images/gimp.png, id=93, 501.875pt x 225.84375pt>
 File: images/gimp.png Graphic file (type png)
  <use images/gimp.png>
-[5 <./images/gimp.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5]
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
- [6] (./reportTemplate.aux) ) 
+ [6 <./images/gimp.png>] (./reportTemplate.aux) ) 
 Here is how much of TeX's memory you used:
- 5516 strings out of 495021
- 77650 string characters out of 1181034
- 149512 words of memory out of 3000000
- 8592 multiletter control sequences out of 15000+50000
+ 5522 strings out of 495021
+ 77751 string characters out of 1181034
+ 150603 words of memory out of 3000000
+ 8596 multiletter control sequences out of 15000+50000
  12626 words of font info for 49 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 41i,10n,36p,421b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fon
-ts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on reportTemplate.pdf (6 pages, 138499 bytes).
+ 41i,10n,36p,421b,412s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pf
+b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on reportTemplate.pdf (6 pages, 140686 bytes).
 PDF statistics:
- 130 PDF objects out of 1000 (max. 8388607)
- 24 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 141 PDF objects out of 1000 (max. 8388607)
+ 26 named destinations out of 1000 (max. 500000)
+ 99 words of extra memory for PDF output out of 10000 (max. 10000000)
 
