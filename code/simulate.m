@@ -47,4 +47,10 @@ end
 
 data.finish_time = time;
 
+% Plot exit occupations:
 plotExitedAgents(config, data);
+
+% Store time needed to evacuate:
+timeFileID = fopen(sprintf('frames/%s_finish_time.txt', data.frame_basename), 'w');
+fprintf(timeFileID, '%.1f\n', data.finish_time);
+fclose(timeFileID);
