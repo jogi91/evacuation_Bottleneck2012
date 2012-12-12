@@ -31,8 +31,8 @@ while (length(data.agents) > 0 && sum(data.exit_capacities) > 0) || time < 2
     data = progressAgents(data);
 
     % Draw floor and agents:
-    plotFloor(data);
     if data.save_frames
+			plotFloor(data);
         print('-dpng', sprintf('frames/%s_%05i.png', ...
             data.frame_basename, it));
     end
@@ -50,9 +50,14 @@ end
 data.finish_time = time;
 
 % Plot exit occupations:
-plotExitedAgents(config, data);
+%plotExitedAgents(config, data);
 
 % Store time needed to evacuate:
-timeFileID = fopen(sprintf('frames/%s_finish_time.txt', data.frame_basename), 'w');
-fprintf(timeFileID, '%.1f\n', data.finish_time);
-fclose(timeFileID);
+%timeFileID = fopen(sprintf('frames/%s_finish_time.txt', data.frame_basename), 'w');
+%fprintf(timeFileID, '%.1f\n', data.finish_time);
+%fclose(timeFileID);
+
+%Save the simulated data
+saveFile = sprintf('frames/%s_config_data.mat', data.frame_basename), 'w';
+save(saveFile, 'config', 'data');
+

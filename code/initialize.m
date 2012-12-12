@@ -2,12 +2,6 @@ function data = initialize(config)
 
 data = config;
 
-% Compile C functions:
-mex 'createRangeTree.c';
-mex 'fastSweeping.c';
-mex 'getNormalizedGradient.c';
-mex 'lerp2.c';
-mex 'rangeQuery.c';
 
 % Seed random number generator:
 rng(data.rseed);
