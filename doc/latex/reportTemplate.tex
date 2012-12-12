@@ -30,7 +30,10 @@
 \bigskip
 
 
-\large We hereby agree to make our source code for this project freely available for download from the web pages of the SOMS chair. Furthermore, we assure that all source code is written by ourselves and is not violating any copyright restrictions.
+\large We hereby agree to make our source code for this project freely
+available for download from the web pages of the SOMS chair. Furthermore, we
+assure that all source code is written by ourselves and is not violating any
+copyright restrictions.
 
 \begin{center}
 
@@ -68,7 +71,10 @@
 
 
 % IMPORTANT
-% you MUST include the ETH declaration of originality here; it is available for download on the course website or at http://www.ethz.ch/faculty/exams/plagiarism/index_EN; it can be printed as pdf and should be filled out in handwriting
+% you MUST include the ETH declaration of originality here; it is available for
+% download on the course website or at
+% http://www.ethz.ch/faculty/exams/plagiarism/index_EN; it can be printed as
+% pdf and should be filled out in handwriting
 
 
 %%%%%%%%%% Table of content %%%%%%%%%%%%%%%%%
@@ -83,57 +89,86 @@
 
 \section{Abstract}
 
-This work takes a look onto the evacuation mechanisms of a cruise ship in case of an emergency.
-A simple model is implemented, which is used to simulate the dynamics of such a System. 
-The main emphasis was on the limited capacity of the exits, since that is the key element for a
-rescue boat. 
+This work takes a look into the evacuation mechanisms of a cruise ship in case
+of an emergency.  A simple model is implemented which is used to simulate the
+dynamics of such a system.  The main emphasis was on the limited capacity of
+the exits, since that is the key element for a rescue boat. 
 
 
 \section{Individual contributions}
 
-The work on this project was split among us to fit our strengths the best way possible.
-Because of his knowledge in image editing and formats, Johannes Weinbuch focused on the 
-image manipulation for the input and implemented the loading of the image into MATLAB,
-improving the existing solutions from the previous courses. He further took a large part of the writing for the report and executing the simulations, which were written by Benedek Vartok.
-He evaluated, which code from previous semesters can and should be reused and implemented the missing parts for our special case. Also, he wrote the output mechanisms for the simulation, so that the data can be used for analysis.
+The work on this project was split among us to fit our strengths the best way
+possible.  Because of his knowledge in image editing and formats, Johannes
+Weinbuch focused on the image manipulation for the input and implemented the
+loading of the image into MATLAB, improving the existing solutions from the
+previous courses. He further took a large part of the writing for the report
+and executing the simulations, which were written by Benedek Vartok.  He
+evaluated which code from previous semesters could and should be reused, and
+implemented the missing parts for our special case.  Also, he wrote the output
+mechanisms for the simulation, so that the data could be used for analysis.
 
 
 \section{Introduction and Motivations}
+
 In January 2012, the Costa Concordia hit a rock and ran aground\cite{bbcnews}.
-This event got great media attention for a long time so we decided to take a closer look
-on the evacuation of a cruise ship. The question is, what is the best stratgy to leave the ship?
-This question should for sure be answered on one of the emergency drills, but it is always good 
-to have some background knowledge.
+This event got great media attention for a long time so we decided to take a
+closer look at the evacuation of a cruise ship.  The question is, what is the
+best stratgy to leave the ship?  This question should for sure be answered with
+one of the emergency drills, but it is always good to have some background
+knowledge.
+
 
 \section{Description of the Model}
 
-The model is a big simplification of real life, otherwise it would be way to complex to simulate.
-It assumes, that the ship is intact, that there is calm sea and that the passengers are obliged to leave the ship. 
-A possible explanation for this could be a machine defect which leaks explosive gas in a badly ventilated room in the ship. Further, we assume that the rescue boats are like doors, which close after a certain amount of people going through them. 
+The model is a big simplification of real life, otherwise it would be way too
+complex to simulate.  It assumes that the ship is intact, that there is calm
+sea and that the passengers are obliged to leave the ship.  A possible
+explanation for this could be a machine defect which leaks explosive gas in a
+badly ventilated room in the ship.  Further, we assume that the rescue boats are
+like doors, which close after a certain amount of people going through them. 
 
-Since we also assume that the other doors, for example between the rooms or floors, are constantly open and working, we only simulate one deck, the one with the exits to the rescue boats.
-The evacuation of multiple floors in a static building has already been researched in \cite{multilevel}. 
+Since we also assume that the other doors, for example between the rooms or
+floors, are constantly open and working, we only simulate one deck, the one
+with the exits to the rescue boats.  The evacuation of multiple floors in a
+static building has already been researched in \cite{multilevel}. 
 
-After these simplifications, the task left to simulate was the evacuation of a single floor with some elements, that can change.
-For this task, we chose a simple agend based modelling solution as described in \cite{helbing}.
-A passenger is treated like a particle. It has a mass, and there are physical and social forces, accelerating that mass so that it cannot follow it's desired direction.
-The desired direction is implemented as the shortest path to the nearest exit.
+After these simplifications, the task left to simulate was the evacuation of a
+single floor with some elements that can change.  For this task, we chose a
+simple agend based modelling solution as described in \cite{helbing}.  A
+passenger is treated as a particle.  It has a mass, and there are physical and
+social forces, accelerating that mass so that it cannot always follow its
+desired direction.  The desired direction is implemented as the shortest path
+to the nearest exit.
 
 \section{Implementation}
 
-\subsection{Input}
-Since we had some good projects which covered similar problems as ours, we could get some ideas from them, but at the same time improve them.
-Namely, there are \cite{multilevel} and \cite{airplane}. As far as the Input for the simulation is concerned, we see two approaches in these works for getting the map data into the simulation. In \cite{multilevel}, a simple PNG image is used to get a map into the simulation. The Problem here is, that only a certain rgb color value can be read out of the image.
-This can lead to problems, if the image is processed with automatic or semiautomatic image manipulation programs, since only a minor difference in color can prevent the generation of the desired data.
-In \cite{airplane}, the image format is even more simple. There is only a Bitmap image read into MATLAB. Since the Bitmap Images can use a colormap, Matlab doesn't use 3 channels but a unique Number for each color in a image Matrix to give every Pixel it's color.
-This has the same problem as the PNG solution regarding how exactly the colors have to be set, but
-the different parts of the image can be separated with less code.
+\subsection{Input} Since we had some good projects which covered similar
+problems as ours, we could get some ideas from them, but at the same time
+improve them.  Namely, there are \cite{multilevel} and \cite{airplane}.  As far
+as the input for the simulation is concerned, we see two approaches in these
+works for getting the map data into the simulation.  In \cite{multilevel}, a
+simple PNG image is used to get a map into the simulation. The problem here is
+that only a certain RGB color value can be read out of the image.  This can
+lead to problems if the image is processed with automatic or semiautomatic
+image manipulation programs, since only a minor difference in color can prevent
+the generation of the desired data.  In \cite{airplane}, the image format is
+even more simple.  There is only a bitmap image read into MATLAB.  Since the
+bitmap images can use a colormap, MATLAB doesn't use 3 channels but a unique
+number for each color in an image matrix to give every pixel its color.  This
+has the same problem as the PNG solution regarding how exactly the colors have
+to be set, but the different parts of the image can be separated with less
+code.
 
-We took the best of both solutions. We used the PNG-Format with indexed Colors.
-So we have the most flexibility with very little usage of Disk space.
-There is no special ``Wall Color'' or anything like that, just a simple Rule how the Colormap is read:
-Color 0 of the map specifies Walls, Color 1 free Space. Then, there can be any Number of Spawn Zones.
-Spawn Zones are the areas in the image, where new Agents can be placed. With different Spawn zones, it is possible to account for different situations: A Ball room is different from a Staircase. The number of Spawn Zones is specified in the configuration file. At last, there is any number of exits. Again, each exit can have it's own parameters or can even be handled special in the program's code. 
+We took the best of both solutions. We used the PNG-format with indexed colors.
+So we have the most flexibility with very little usage of disk space.  There is
+no special ``wall color'' or anything like that, just a simple rule how the
+colormap is read: Color 0 of the map specifies walls, color 1 free space.
+Then, there can be any number of spawn zones.  Spawn zones are the areas in the
+image, where new agents can be placed. With different spawn zones, it is
+possible to account for different situations: A ballroom is different from a
+staircase.  The number of spawn zones is specified in the configuration file.
+At last, there is an arbitrary number of exits.  Again, each exit can have its
+own parameters or can even be handled specially in the program's code. 
 
 \begin{figure}[h]
 	\centering
@@ -142,7 +177,10 @@ Spawn Zones are the areas in the image, where new Agents can be placed. With dif
 	\label{gimpscreenshot}
 	
 \end{figure}
-To manipulate the colormap, any slightly sophisticated image manipulation program should suffice. We used the free Software Gimp \cite{gimp}. It has a very comfortable command which allows the user to rearrange the colormap. This is shown in Figure~\ref{gimpscreenshot}.
+To manipulate the colormap, any slightly sophisticated image manipulation
+program should suffice. We used the free software Gimp \cite{gimp}. It has a
+very convenient command which allows the user to rearrange the colormap. This
+is shown in figure~\ref{gimpscreenshot}.
 
 \subsection{The Simulation Routines} % (fold)
 \label{sub:The simulation Routines}
