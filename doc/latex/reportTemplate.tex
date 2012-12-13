@@ -145,6 +145,8 @@ section~\ref{sub:movement}.
 
 \subsection{Input}
 
+\label{sub:input}
+
 Since we had some good projects which covered similar
 problems as ours, we could get some ideas from them, but at the same time
 improve them.  Namely, there are \cite{multilevel} and \cite{airplane}.  As far
@@ -206,13 +208,27 @@ and saving frames and collecting data.
 
 \subsubsection{Agent Placement}
 
+As mentioned in section~\ref{sub:input}, our model of the ship has different
+spawning zones where new agents can start out at.  The way we implemented it,
+in every step of the simulation loop it is checked whether there are any
+remaining agents that need to be placed (i.e. agents which are not in the
+simulation yet).  If there are, then for every agent the program chooses a
+random point in the spawning zones and places him there, unless it detects that
+the agent would collide either with walls or other agents.  In that case, the
+routine tries the placement for that agent up to five times, each time with a
+new random position.  If the agent couldn't be placed, then he will have a
+chance to spawn in the next time step.
+
+This method was implemented in \texttt{placeAgents}.  In the same method, the
+basic properties of the agent get assigned, like the starting zero velocity and
+a random radius.
+
 \subsubsection{Agent Movevent}
 \label{sub:movement}
 
-\subsection{Output} % (fold)
-\label{sub:Output}
+\subsection{Output}
+\label{sub:output}
 
-% subsection Output (end)
 \section{Simulation Results and Discussion}
 
 \section{Summary and Outlook}

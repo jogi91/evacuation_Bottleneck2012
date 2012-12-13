@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.29)  13 DEC 2012 19:41
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.29)  13 DEC 2012 19:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -417,46 +417,45 @@ Overfull \hbox (5.3226pt too wide) in paragraph at lines 46--64
 <images/gimp.png, id=115, 501.875pt x 225.84375pt>
 File: images/gimp.png Graphic file (type png)
  <use images/gimp.png>
-Package pdftex.def Info: images/gimp.png used on input line 178.
+Package pdftex.def Info: images/gimp.png used on input line 180.
 (pdftex.def)             Requested size: 250.93687pt x 112.92159pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[5]
+[5] [6 <./images/gimp.png>]
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
- [6 <./images/gimp.png>]
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 247.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 264.
  [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 247.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 264.
  (./reportTemplate.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 247.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 247.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 264.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 264.
 Package rerunfilecheck Info: File `reportTemplate.out' has not changed.
 (rerunfilecheck)             Checksum: 385F6827EA584BED658155DF8DBB09D8;938.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 247.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 264.
  ) 
 Here is how much of TeX's memory you used:
- 6330 strings out of 494977
- 90453 string characters out of 3179721
- 177909 words of memory out of 3000000
- 9414 multiletter control sequences out of 15000+200000
+ 6331 strings out of 494977
+ 90464 string characters out of 3179721
+ 177945 words of memory out of 3000000
+ 9415 multiletter control sequences out of 15000+200000
  12934 words of font info for 50 fonts, out of 3000000 for 9000
  36 hyphenation exceptions out of 8191
- 42i,10n,28p,337b,442s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,10n,28p,337b,322s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 r17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/
 share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on reportTemplate.pdf (7 pages, 144381 bytes).
+Output written on reportTemplate.pdf (7 pages, 145729 bytes).
 PDF statistics:
- 177 PDF objects out of 1000 (max. 8388607)
- 156 compressed objects within 2 object streams
+ 178 PDF objects out of 1000 (max. 8388607)
+ 157 compressed objects within 2 object streams
  31 named destinations out of 1000 (max. 500000)
  131 words of extra memory for PDF output out of 10000 (max. 10000000)
 
