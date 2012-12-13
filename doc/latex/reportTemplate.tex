@@ -138,11 +138,14 @@ simple agend based modelling solution as described in \cite{helbing}.  A
 passenger is treated as a particle.  It has a mass, and there are physical and
 social forces, accelerating that mass so that it cannot always follow its
 desired direction.  The desired direction is implemented as the shortest path
-to the nearest exit.
+to the nearest exit.  For the exact formulae for the forces see
+section~\ref{sub:movement}.
 
 \section{Implementation}
 
-\subsection{Input} Since we had some good projects which covered similar
+\subsection{Input}
+
+Since we had some good projects which covered similar
 problems as ours, we could get some ideas from them, but at the same time
 improve them.  Namely, there are \cite{multilevel} and \cite{airplane}.  As far
 as the input for the simulation is concerned, we see two approaches in these
@@ -182,10 +185,29 @@ program should suffice. We used the free software Gimp \cite{gimp}. It has a
 very convenient command which allows the user to rearrange the colormap. This
 is shown in figure~\ref{gimpscreenshot}.
 
-\subsection{The Simulation Routines} % (fold)
+\subsection{The Simulation Routines}
 \label{sub:The simulation Routines}
 
-% subsection The simulation Routines (end)
+\subsubsection{Code Reuse from Multilevel Evacuation}
+
+Since this project has very similar foundations as \cite{multilevel}, we were
+able to use a lot of code from their repository.  Some of the structure needed
+to be changed to implement our custom features, but for example the utility
+functions for the Fast Sweeping algorithm and the linear interpolation which
+the other group wrote in C were copied 1:1 into our code-tree.
+
+\subsubsection{Main Loop}
+
+\texttt{simulate} is the routine we call when we do an entire simulation.  It
+uses the \texttt{loadConfig} and \texttt{initialize} functions to initialize
+its runtime data, then it does the loop calculating forces, adding new agents,
+progressing the agents, updating the exit vector fields, potentially plotting
+and saving frames and collecting data.
+
+\subsubsection{Agent Placement}
+
+\subsubsection{Agent Movevent}
+\label{sub:movement}
 
 \subsection{Output} % (fold)
 \label{sub:Output}
