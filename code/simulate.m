@@ -13,7 +13,7 @@ time = 0;
 it = 0;
 % Termination criteria:  The program stops if there are no more agents or
 % exits left, but it runs for at least two seconds in any case.
-while (length(data.agents) > 0 && sum(data.exit_capacities) > 0) || time < 2
+while (length(data.agents) > 0 && sum(data.exit_capacities) > 0 && time<data.duration) || time < 2
 %     tic;
     
     % Possibly spawn new agents:
