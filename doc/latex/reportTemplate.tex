@@ -105,6 +105,8 @@ on the evacuation of a cruise ship. The question is, what is the best stratgy to
 This question should for sure be answered on one of the emergency drills, but it is always good 
 to have some background knowledge.
 
+So, our key questions are: Which is the best strategy for evacuation concerning the choice of the way towards the rescue boats. Should all passengers dirstribute equally over the entries, or is there a better one? Also, which one takes longer: a high panic level on a nearly empty ship or a low panic level on a very full ship. What happens, if a boat suddenly is inoperable? How can the reaction be optimized?
+
 \section{Description of the Model}
 
 The model is a big simplification of real life, otherwise it would be way to complex to simulate.
@@ -118,6 +120,13 @@ After these simplifications, the task left to simulate was the evacuation of a s
 For this task, we chose a simple agend based modelling solution as described in \cite{helbing}.
 A passenger is treated like a particle. It has a mass, and there are physical and social forces, accelerating that mass so that it cannot follow it's desired direction.
 The desired direction is implemented as the shortest path to the nearest exit.
+
+The floor is given by a Deck Plan for the Costa Voyager \cite{costa}. Since these deck plans usually are made for advertisment purposes, it is to expect, that they are not absolutely accurate.
+So during image processing for simplification of this plan, a few further assumptions were made, mainly about the actual sizes and capacities. 
+We won't list them all here, because they are also in the configuration Files. 
+
+The last element of additional complexity was added to get an idea of how the closing of an exit works. 
+A switch was added to decide, wether every agent should know instantanously about the closed exit or if the knowledge spreads over time.
 
 \section{Implementation}
 
@@ -155,6 +164,43 @@ To manipulate the colormap, any slightly sophisticated image manipulation progra
 % subsection Output (end)
 \section{Simulation Results and Discussion}
 
+\subsection{Passenger distribution} % (fold)
+If we plot the exited agents over a time axis for each exit, we can see, that the boats tend to be filled in a sequential way.
+This means, a new boat only gets frequented, if the old boad is already full. This effect is very strong and good to see, if we have only few passengers, but also if there are many, a tendency towards this can be observed.
+Although there could be numerous reasons for this to happen, in reality a more distributed and parallel filling of the boats is expected. The simulation is based on a model which takes the distance to the nearest exit as the indicator for the desired direction.
+In reality, people want to get out of the ship the fastest way possible, especially if there are only limited capacities on the boats.
+This suggests, that the nearest exit is not the best strategy to get out fast.
+On the specific geometry of the costa Concordia, the corridor from bow to stern ends more on the starboard (right) side. 
+The agents follow the shortest path and start to jam up, while on the left, there are no obstacles.
+In Reality, at least a few people would recognize that and avoid the jam.
+% subsection Passenger distribution (end)
+
+\subsection{Panic Level} % (fold)
+
+% subsection Panic Level (end)
+\subsection{Closed exits} % (fold)
+\label{sub:Closed exits}
+In the simulation, two ways were defined to react to a full boat. First, there was an instantanous update on the whole ship.
+This is a model for an announcement over speakers over the whole ship.
+The Agents adapt their direction immediately, which can be seen on a video of the simulation.
+This behaviour is realistic in a case, when there are not too many people, which are not in panic.
+
+The second way is, that the information is spread in a circle around the exit.
+This shall model a simple communication between agents, that takes time.
+With this simple rule of updating the directions, the behaviour is much more realistic, even though the rule doesn't account for the number of people nearby. 
+This means, the information spreads, even if there is nobody. 
+However, an interesting phenomenon during the updates can be observed:
+While the people near the exit try to get to the next one, they get pushed back by the others, which don't know of the change yet.
+
+The flaw of this is, that a slow expansion rate leads to more pushing, but if it's too slow, even an agent that escaped can be run against the border of the expansion circle.
+This is then seen as the agent stopping, even if there is nothing blocking his path. That happens, because the agent is faster than the expansion rate of the information. From observations in the simulation, we found \(0.5\frac{m}{s}\) to look mostly like we expected it, eventhough sometimes, there are still sometimes agents slowed down by the expansion rate.
+
+The effect of the pushback on the evacuation time is very small, because of numerous bottlenecks before the actual exit.
+
+TODO: PLOT EINFÜGEN
+
+% subsection Closed exits (end)
+
 \section{Summary and Outlook}
 
 \section{References}
@@ -167,13 +213,19 @@ To manipulate the colormap, any slightly sophisticated image manipulation progra
 
 	\bibitem{bbcnews}
 		\url{http://www.bbc.co.uk/news/world-europe-16563562}, 9.12.2012
+
 	\bibitem{multilevel}
 	\emph{Modelling Situations of Evacuation
 in a Multi-level Building} , 
 Hans Hardmeier, Andrin Jenal, Beat Küng, Felix Thaler, Zurich, April 2012
+
 	\bibitem{helbing}
 		\emph{Simulating dynamical features of escape panic},
 		Dirk Helbing, Ill\'es Farkas, Tam\'as Vicsek, Nature, 28. September 2000
+
+	\bibitem{costa}
+		\url{http://www.kreuzfahrtberater.de/deckplan.php?schiff=Costa+Voyager&bf&dpe=2}
+
 	\bibitem{airplane}
 		\emph{Pedestrian Dynamics Airplane Evacuation Simulation},
 		Philipp Heer, Lukas Bühler, Zurich, May 2011
