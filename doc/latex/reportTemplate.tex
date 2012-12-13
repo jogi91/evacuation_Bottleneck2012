@@ -193,20 +193,26 @@ is shown in figure~\ref{gimpscreenshot}.
 \subsubsection{Code Reuse from Multilevel Evacuation}
 
 Since this project has very similar foundations as \cite{multilevel} (like the
-forces used in the model), we were able to use a lot of code from their
-repository.  Some of the structure needed to be changed to implement our custom
-features, but for example the utility functions for the Fast Sweeping algorithm
-and the linear interpolation which the other group wrote in C were copied 1:1
-into our code-tree.
+forces used in the model), we were able to use a lot of code and some design
+decisions from their program.  Some of the structure needed to be changed to
+implement our custom features, but for example the utility functions for the
+Fast Sweeping algorithm (\texttt{fastSweeping.c}), generating gradients
+(\texttt{getNormalizedGradient.c}) and the linear interpolation
+(\texttt{lerp2.c}) which the other group wrote in C were copied without
+modification into our code-tree.
 
 \subsubsection{General Structure}
+
+\label{sub:structure}
 
 During the entire program run, one single big structure is used to hold and
 pass around the state of the simulation.
 
 At first, this structure is initialized with the fields that are given in the
-configuration file by \texttt{loadConfig}.  Then, \texttt{initialize} runs over
-the struct and calculates some data needed in the simulation, such as the
+configuration file by \texttt{loadConfig}\footnote{The MATLAB implementation of
+our functions is in the \texttt{code} directory: \texttt{loadConfig} can be
+found in the file \texttt{code/loadConfig.m} etc.}.  Then, \texttt{initialize} runs
+over the struct and calculates some data needed in the simulation, such as the
 vector fields needed for the wall and exit force fields using the
 \texttt{fastSweeping} method which we got from \cite{multilevel}.
 
@@ -241,18 +247,97 @@ a random radius.
 \label{sub:movement}
 
 To simulate the movement of the agents in this physical model, different forces
-need to be calculated in every step on every agent.  These forces have been
-separated into the following functions which \texttt{simulate} calls:
+need to be calculated in every step on every agent.  All of the force formulae
+have been taken from \cite{helbing}.  These forces have been separated into the
+following functions which are called by \texttt{simulate}:
 
 \begin{description}
 
 \item[\texttt{addDesiredForces}] is responsible for making the agents seek the
 exits of the layout, in our case the rescue boats.
-% TODO
+
+This is accomplished by giving an agent a ``desired'' velocity vector pointing
+along the shortest path to the nearest exit.  The vector is sampled and
+interpolated (using \texttt{lerp2} from \cite{multilevel}) from a vector field
+which is calculated at the beginning (see \ref{sub:structure}) of the
+simulation and when the exits change (see \ref{sub:exitremove}).
+
+Using this desired vector $\vec{e}$ we can say what force addition the agent gets:
+
+\[ \vec{F}_\text{desired} = m \frac{v_0 \vec{e} - \vec{v}}{\tau} \]
+
+where $m$ is the agent's mass, $v_0$ is his target speed, $\vec{v}$ is
+his current velocity vector and $\tau$ is a characteristic time determining how
+fast the desired velocity should be reached.
+
+\item[\texttt{addInterAgentForces}] models the repulsive forces between agents:
+They do not want to get too close together and if they touch, they have to be
+kept apart physically and some friction appears.  The model we use has this
+formula:
+
+\[ \vec{F}_\text{agents} = \big(A e^{(r-d)/B} + k \max\{0, r-d\}\big) \vec{n} +
+                     \kappa \max\{0, r-d\} \Delta \vec{v} \cdot \vec{t} \]
+
+where $r$ is the sum of radii of both agents, $d$ is the distance between the
+center points of the agents, $\vec{n}$ is the normalized vector between the two
+agents, $\vec{t}$ is the tangential vector and $\Delta \vec{v}$ is the velocity
+difference vector.  $A$ influences the magnitude of the ``social'' repulsive
+force, $B$ specifies a factor for the range of influence for this force, $k$
+gives the strength of the physical separation force and $\kappa$ is a friction
+coefficient.
+
+For finding possible agent pairs to calculate the function on we used the naive
+approach of checking every possible pairing with two nested loops and then
+using a cutoff distance to avoid calculating this complicated force expression
+when it's too small to matter anyways.  This method has complexity
+$O(N_\text{agents}^2)$ which is far for optimal; we also tested the Range Tree
+implementation of \cite{multilevel} for our program, however benchmarks didn't
+show a noticeable gain in efficiency.
+
+\item[\texttt{addWallForces}] calculates agents avoiding and experiencing
+resistance from walls.  Just like agent-agent repulsion, this force has a
+``social'', a physical and a frictional component:
+
+\[ \vec{F}_\text{walls} = \big(A e^{(r-d)/B} + k \max\{0, r-d\}\big) \vec{n} -
+                    \kappa \max\{0, r-d\} (\vec{v} \cdot \vec{t}) \vec{t} \]
+
+where $r$ is the radius of the agent, $d$ is his distance from the wall,
+$\vec{n}$ is the wall normal vector, $\vec{t}$ is the wall tangent vector and
+$\vec{v}$ is the agent's velocity vector.  The coefficients are the same as in
+$F_\text{agents}$.
+
+Accessing the wall distances and normals is done similarly to
+\texttt{addDesiredForces}, with precalculated fields using the Fast Sweeping
+method.
+
+\item[\texttt{progressAgents}] applies the forces from the above listed
+functions, using them to update the agents' positions and velocities for the
+next simulation step.
+
+To accomplish this, the leap-frog integration scheme was used.  In every step,
+the following recalculations of the velocities and positions of the agents take
+place:
+
+\begin{align*}
+\vec{v} &= \vec{v} + \Delta t \cdot \frac{\vec{F}}{m}  \\
+\vec{x} &= \vec{x} + \Delta t \cdot \vec{v}
+\end{align*}
+
+This method is fairly well suited for physical simulations with forces such as
+these.  However, extra measures were taken to improve the stability of our
+program:  Before doing any further calculations with them, the velocities and
+forces get clipped to a configurable maximum magnitude to avoid instabilities
+for too high step-sizes or too strong force parameters.
+
+Without this, the simulation of some agents might get out of control if they
+get too close to walls or to other agents and behave in unphysical ways.
 
 \end{description}
 
-\subsection{Output}
+\subsubsection{Removing Filled Exits}
+\label{sub:exitremove}
+
+\subsection{Output and Plotting}
 \label{sub:output}
 
 \section{Simulation Results and Discussion}
