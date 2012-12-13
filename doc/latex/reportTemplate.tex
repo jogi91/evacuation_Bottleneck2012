@@ -192,11 +192,23 @@ is shown in figure~\ref{gimpscreenshot}.
 
 \subsubsection{Code Reuse from Multilevel Evacuation}
 
-Since this project has very similar foundations as \cite{multilevel}, we were
-able to use a lot of code from their repository.  Some of the structure needed
-to be changed to implement our custom features, but for example the utility
-functions for the Fast Sweeping algorithm and the linear interpolation which
-the other group wrote in C were copied 1:1 into our code-tree.
+Since this project has very similar foundations as \cite{multilevel} (like the
+forces used in the model), we were able to use a lot of code from their
+repository.  Some of the structure needed to be changed to implement our custom
+features, but for example the utility functions for the Fast Sweeping algorithm
+and the linear interpolation which the other group wrote in C were copied 1:1
+into our code-tree.
+
+\subsubsection{General Structure}
+
+During the entire program run, one single big structure is used to hold and
+pass around the state of the simulation.
+
+At first, this structure is initialized with the fields that are given in the
+configuration file by \texttt{loadConfig}.  Then, \texttt{initialize} runs over
+the struct and calculates some data needed in the simulation, such as the
+vector fields needed for the wall and exit force fields using the
+\texttt{fastSweeping} method which we got from \cite{multilevel}.
 
 \subsubsection{Main Loop}
 
@@ -205,6 +217,8 @@ uses the \texttt{loadConfig} and \texttt{initialize} functions to initialize
 its runtime data, then it does the loop calculating forces, adding new agents,
 progressing the agents, updating the exit vector fields, potentially plotting
 and saving frames and collecting data.
+
+These steps will be explained in detail in the following sections.
 
 \subsubsection{Agent Placement}
 
@@ -223,8 +237,20 @@ This method was implemented in \texttt{placeAgents}.  In the same method, the
 basic properties of the agent get assigned, like the starting zero velocity and
 a random radius.
 
-\subsubsection{Agent Movevent}
+\subsubsection{Agent Dynamics}
 \label{sub:movement}
+
+To simulate the movement of the agents in this physical model, different forces
+need to be calculated in every step on every agent.  These forces have been
+separated into the following functions which \texttt{simulate} calls:
+
+\begin{description}
+
+\item[\texttt{addDesiredForces}] is responsible for making the agents seek the
+exits of the layout, in our case the rescue boats.
+% TODO
+
+\end{description}
 
 \subsection{Output}
 \label{sub:output}
