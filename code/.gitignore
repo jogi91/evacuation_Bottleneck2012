@@ -1,0 +1,11 @@
+frames/*.eps
+frames/*.png
+frames/*.txt
+frames/*.log
+frames/*.mat
+frames/*.avi
+frames/*.mpg
+frames/*.old
+frames/*.tar
+frames/*.bak
+

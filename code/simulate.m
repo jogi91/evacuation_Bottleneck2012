@@ -11,9 +11,9 @@ data = initialize(config);
 % Simulation loop:
 time = 0;
 it = 0;
-while length(data.agents) > 0 || time < 2
-%     tic;
-    
+% Termination criteria:  The program stops if there are no more agents or
+% exits left, but it runs for at least two seconds in any case.
+while (length(data.agents) > 0 && sum(data.exit_capacities) > 0 && time<data.duration) || time < 2
     % Possibly spawn new agents:
     data = placeAgents(data);
     
@@ -29,8 +29,8 @@ while length(data.agents) > 0 || time < 2
     data = progressAgents(data);
 
     % Draw floor and agents:
-    plotFloor(data);
     if data.save_frames
+        plotFloor(data);
         print('-dpng', sprintf('frames/%s_%05i.png', ...
             data.frame_basename, it));
     end
@@ -41,10 +41,19 @@ while length(data.agents) > 0 || time < 2
     
 	time = time + data.dt;
     it = it + 1;
-    
-%     toc
 end
 
 data.finish_time = time;
 
-plotExitedAgents(config, data);
+% Plot exit occupations:
+%plotExitedAgents(config, data);
+
+% Store time needed to evacuate:
+%timeFileID = fopen(sprintf('frames/%s_finish_time.txt', data.frame_basename), 'w');
+%fprintf(timeFileID, '%.1f\n', data.finish_time);
+%fclose(timeFileID);
+
+% Save the simulation data:
+saveFile = sprintf('frames/%s_config_data.mat', data.frame_basename), 'w';
+save(saveFile, 'config', 'data');
+
