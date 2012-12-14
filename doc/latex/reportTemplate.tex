@@ -471,18 +471,16 @@ both with many and few agents, as seen on Figures \ref{evactimes1to11} and \ref{
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{images/gimp.png}
-	\caption{Platzhalter}
+	\includegraphics[scale=0.5]{images/evactimes1to11.eps}
+	\caption{Evacuation times with 700 agents and varying \(v_0\) 	}
 	\label{evactimes1to11}
-	
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.5]{images/gimp.png}
-	\caption{Platzhalter}
+	\includegraphics[scale=0.5]{images/evactimes23to33.eps}
+	\caption{Evacuation times with 350 agents and varying \(v_0\) 	}
 	\label{evactimes23to33}
-	
 \end{figure}
 
 However, with higher values for \(v_0\), we could not reproduce the results, because
@@ -494,17 +492,18 @@ the ship. This introduces an error, which only gets bigger with higher values of
 To circumvent this, a simulation with a smaller timestep was run, but even with the timestep 
 being a millisecond, we still got agents stuck in walls. An example is shown in Figure~\ref{stuckinwall}. This is a part during the simulation with \(v_0 = 3.8m/s\) and a timestep of a millisecond.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{images/StuckInWall.png}
+	\caption{Agents stuck in walls due to too high \(v_0\). Image was taken with \(v_0=3.8\frac{m}{s}\) :and a timestep of a millisecond.}
+	\label{stuckinwall}
+	
+\end{figure}
+
 A timestep of a millisecond means, that an agent, moving at five meters per second,
 goes a distance of 5 millimeters per timestep. Since the agents get pushed into walls
 at these rather precise steps of movement, an even smaller timestep will likely yield similar results. 
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.5]{images/gimp.png}
-	\caption{Platzhalter}
-	\label{stuckinwall}
-	
-\end{figure}
 
 Since we cannot answer our question, wether a high panic level (which means a high value for \(v_0\))
 with few people
@@ -580,7 +579,7 @@ TODO: PLOT EINFÜGEN
 	\bibitem{multilevel}
 	\emph{Modelling Situations of Evacuation
 in a Multi-level Building} , 
-Hans Hardmeier, Andrin Jenal, Beat Küng, Felix Thaler, Zurich, April 2012
+Hans Hardmeier, Andrin Jenal, Beat K\"ung, Felix Thaler, Zurich, April 2012
 
 	\bibitem{helbing}
 		\emph{Simulating dynamical features of escape panic},
