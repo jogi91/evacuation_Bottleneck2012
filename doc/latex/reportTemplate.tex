@@ -95,7 +95,7 @@ dynamics of such a system.  The main emphasis was on the limited capacity of
 the exits, since that is the key element for a rescue boat. 
 
 
-\section{Individual contributions}
+\section{Individual Contributions}
 
 The work on this project was split among us to fit our strengths the best way
 possible.  Because of his knowledge in image editing and formats, Johannes
@@ -117,7 +117,12 @@ best stratgy to leave the ship?  This question should for sure be answered with
 one of the emergency drills, but it is always good to have some background
 knowledge.
 
-So, our key questions are: Which is the best strategy for evacuation concerning the choice of the way towards the rescue boats. Should all passengers dirstribute equally over the entries, or is there a better one? Also, which one takes longer: a high panic level on a nearly empty ship or a low panic level on a very full ship. What happens, if a boat suddenly is inoperable? How can the reaction be optimized?
+So, our key questions are: Which is the best strategy for evacuation concerning
+the choice of the way towards the rescue boats. Should all passengers
+dirstribute equally over the entries, or is there a better one? Also, which one
+takes longer: a high panic level on a nearly empty ship or a low panic level on
+a very full ship. What happens, if a boat suddenly is inoperable? How can the
+reaction be optimized?
 
 
 \section{Description of the Model}
@@ -136,19 +141,25 @@ static building has already been researched in \cite{multilevel}.
 
 After these simplifications, the task left to simulate was the evacuation of a
 single floor with some elements that can change.  For this task, we chose a
-simple agend based modelling solution as described in \cite{helbing}.  A
+simple agent based modeling solution as described in \cite{helbing}.  A
 passenger is treated as a particle.  It has a mass, and there are physical and
 social forces, accelerating that mass so that it cannot always follow its
 desired direction.  The desired direction is implemented as the shortest path
 to the nearest exit.  For the exact formulae for the forces see
 section~\ref{sub:movement}.
 
-The floor is given by a Deck Plan for the Costa Voyager \cite{costa}. Since these deck plans usually are made for advertisment purposes, it is to expect, that they are not absolutely accurate.
-So during image processing for simplification of this plan, a few further assumptions were made, mainly about the actual sizes and capacities. 
-We won't list them all here, because they are also in the configuration Files. 
+The floor is given by a deck plan for the Costa Voyager \cite{costa}. Since
+these deck plans usually are made for advertisment purposes, it is to be
+expected that they are not absolutely accurate.  So during image processing for
+simplification of this plan, a few further assumptions were made, mainly about
+the actual sizes and capacities.  We won't list them all here, because they are
+also in the configuration files. 
 
-The last element of additional complexity was added to get an idea of how the closing of an exit works. 
-A switch was added to decide, wether every agent should know instantanously about the closed exit or if the knowledge spreads over time.
+The last element of additional complexity was added to get an idea of how the
+closing of an exit works.  A switch was added to decide whether every agent
+should know instantanously about the closed exit or if the knowledge spreads
+over time.  The technical aspect of this is further explained in
+section~\ref{sub:exitremove}.
 
 \section{Implementation}
 
@@ -220,9 +231,9 @@ pass around the state of the simulation.
 At first, this structure is initialized with the fields that are given in the
 configuration file by \texttt{loadConfig}\footnote{The MATLAB implementation of
 our functions is in the \texttt{code} directory: \texttt{loadConfig} can be
-found in the file \texttt{code/loadConfig.m} etc.}.  Then, \texttt{initialize} runs
-over the struct and calculates some data needed in the simulation, such as the
-vector fields needed for the wall and exit force fields using the
+found in the file \texttt{code/loadConfig.m} etc.}.  Then, \texttt{initialize}
+runs over the struct and calculates some data needed in the simulation, such as
+the vector fields needed for the wall and exit force fields using the
 \texttt{fastSweeping} method which we got from \cite{multilevel}.
 
 \subsubsection{Main Loop}
@@ -394,37 +405,56 @@ of the total escaped agents.
 \section{Simulation Results and Discussion}
 
 \subsection{Passenger distribution} % (fold)
-If we plot the exited agents over a time axis for each exit, we can see, that the boats tend to be filled in a sequential way.
-This means, a new boat only gets frequented, if the old boad is already full. This effect is very strong and good to see, if we have only few passengers, but also if there are many, a tendency towards this can be observed.
-Although there could be numerous reasons for this to happen, in reality a more distributed and parallel filling of the boats is expected. The simulation is based on a model which takes the distance to the nearest exit as the indicator for the desired direction.
-In reality, people want to get out of the ship the fastest way possible, especially if there are only limited capacities on the boats.
-This suggests, that the nearest exit is not the best strategy to get out fast.
-On the specific geometry of the costa Concordia, the corridor from bow to stern ends more on the starboard (right) side. 
-The agents follow the shortest path and start to jam up, while on the left, there are no obstacles.
-In Reality, at least a few people would recognize that and avoid the jam.
+
+If we plot the exited agents over a time axis for each exit, we can see that
+the boats tend to be filled in a sequential way.  This means, a new boat only
+gets frequented if the old boat is already full.  This effect is very strong
+and good to see if we have only few passengers, but also if there are many, a
+tendency towards this can be observed.  Although there could be numerous
+reasons for this to happen, in reality a more distributed and parallel filling
+of the boats is expected.  The simulation is based on a model which takes the
+distance to the nearest exit as the indicator for the desired direction.  In
+reality, people want to get out of the ship the fastest way possible,
+especially if there are only limited capacities on the boats.  This suggests
+that the nearest exit is not the best strategy to get out fast.  On the
+specific geometry of the Costa Concordia, the corridor from bow to stern ends
+more on the starboard (right) side.  The agents follow the shortest path and
+start to jam up, while on the left there are no obstacles.  In reality, at
+least a few people would recognize that and avoid the jam.
 % subsection Passenger distribution (end)
 
 \subsection{Panic Level} % (fold)
 
 % subsection Panic Level (end)
-\subsection{Closed exits} % (fold)
+\subsection{Closed Exits} % (fold)
 \label{sub:Closed exits}
-In the simulation, two ways were defined to react to a full boat. First, there was an instantanous update on the whole ship.
-This is a model for an announcement over speakers over the whole ship.
-The Agents adapt their direction immediately, which can be seen on a video of the simulation.
-This behaviour is realistic in a case, when there are not too many people, which are not in panic.
 
-The second way is, that the information is spread in a circle around the exit.
-This shall model a simple communication between agents, that takes time.
-With this simple rule of updating the directions, the behaviour is much more realistic, even though the rule doesn't account for the number of people nearby. 
-This means, the information spreads, even if there is nobody. 
-However, an interesting phenomenon during the updates can be observed:
-While the people near the exit try to get to the next one, they get pushed back by the others, which don't know of the change yet.
+In the simulation, two ways were defined to react to a full boat.  First, there
+was an instantanous update on the whole ship.  This is a model for an
+announcement over speakers over the whole ship.  The agents adapt their
+direction immediately, which can be seen on a video of the simulation.  This
+behaviour is realistic in a case when there are not too many people who aren't
+panicking.
 
-The flaw of this is, that a slow expansion rate leads to more pushing, but if it's too slow, even an agent that escaped can be run against the border of the expansion circle.
-This is then seen as the agent stopping, even if there is nothing blocking his path. That happens, because the agent is faster than the expansion rate of the information. From observations in the simulation, we found \(0.5\frac{m}{s}\) to look mostly like we expected it, eventhough sometimes, there are still sometimes agents slowed down by the expansion rate.
+The second way is that the information is spread in a circle around the exit.
+This shall model a simple communication between agents that takes time.  With
+this simple rule of updating the directions, the behaviour is much more
+realistic, even though the rule doesn't account for the number of people
+nearby.  This means that the information spreads, even if there is nobody.
+However, an interesting phenomenon during the updates can be observed:  While
+the people near the exit try to get to the next one, they get pushed back by
+the others who don't know of the change yet.
 
-The effect of the pushback on the evacuation time is very small, because of numerous bottlenecks before the actual exit.
+The flaw of this is that a slow expansion rate leads to more pushing, but if
+it's too slow, even an agent that escaped can be run against the border of the
+expansion circle.  This is then seen as the agent stopping, even if there is
+nothing blocking his path. That happens because the agent is faster than the
+expansion rate of the information. From observations in the simulation, we
+found \(0.5\frac{m}{s}\) to look mostly like we expected it, even though
+occasionally there are still some agents slowed down by the expansion rate.
+
+The effect of the pushback on the evacuation time is very small, because of
+numerous bottlenecks before the actual exit.
 
 TODO: PLOT EINFÜGEN
 
