@@ -127,10 +127,10 @@ one of the emergency drills, but it is always good to have some background
 knowledge.
 
 So, our key questions are: Which is the best strategy for evacuation concerning
-the choice of the way towards the rescue boats. Should all passengers
+the choice of the way towards the rescue boats?  Should all passengers
 distribute equally over the entries, or is there a better one? Also, which one
 takes longer: a high panic level on a nearly empty ship or a low panic level on
-a very full ship. What happens, if a boat suddenly is inoperable? How can the
+a very full ship?  What happens if a boat is suddenly inoperable? How can the
 reaction be optimized?
 
 
@@ -141,7 +141,7 @@ complex to simulate.  It assumes that the ship is intact, that there is calm
 sea and that the passengers are obliged to leave the ship.  A possible
 explanation for this could be a machine defect which leaks explosive gas in a
 badly ventilated room in the ship.  Further, we assume that the rescue boats are
-like doors, which close after a certain amount of people going through them. 
+like doors which close after a certain amount of people going through them. 
 
 Since we also assume that the other doors, for example between the rooms or
 floors, are constantly open and working, we only simulate one deck, the one
@@ -195,10 +195,10 @@ code.
 
 We took the best of both solutions. We used the PNG-format with indexed colors.
 So we have the most flexibility with very little usage of disk space.  There is
-no special ``wall color'' or anything like that, just a simple rule how the
+no special ``wall color'' or anything like that, just a simple rule on how the
 color map is read: Color 0 of the map specifies walls, color 1 free space.
 Then, there can be any number of spawn zones.  Spawn zones are the areas in the
-image, where new agents can be placed. With different spawn zones, it is
+image where new agents can be placed. With different spawn zones, it is
 possible to account for different situations: A ballroom is different from a
 staircase.  The number of spawn zones is specified in the configuration file.
 At last, there is an arbitrary number of exits.  Again, each exit can have its
@@ -207,7 +207,7 @@ own parameters or can even be handled specially in the program's code.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/gimp.png}
-	\caption{Screenshot of the Rearrange Colormap dialog in Gimp 2.6.11}
+	\caption{Screenshot of the Rearrange Colormap dialog in Gimp 2.6.11.}
 	\label{gimpscreenshot}
 	
 \end{figure}
@@ -288,8 +288,8 @@ exits of the layout, in our case the rescue boats.
 This is accomplished by giving an agent a ``desired'' velocity vector pointing
 along the shortest path to the nearest exit.  The vector is sampled and
 interpolated (using \texttt{lerp2} from \cite{multilevel}) from a vector field
-which is calculated at the beginning (see \ref{sub:structure}) of the
-simulation and when the exits change (see \ref{sub:exitremove}).
+which is calculated at the beginning of the simulation (see
+\ref{sub:structure}) and when the exits change (see \ref{sub:exitremove}).
 
 Using this desired vector $\vec{e}$ we can say what force addition the agent gets:
 
@@ -319,7 +319,7 @@ For finding possible agent pairs to calculate the function on we used the naive
 approach of checking every possible pairing with two nested loops and then
 using a cutoff distance to avoid calculating this complicated force expression
 when it's too small to matter anyways.  This method has complexity
-$O(N_\text{agents}^2)$ which is far for optimal; we also tested the Range Tree
+$O(N_\text{agents}^2)$ which is far from optimal; we also tested the Range Tree
 implementation of \cite{multilevel} for our program, however benchmarks didn't
 show a noticeable gain in efficiency.
 
@@ -413,21 +413,23 @@ of the total escaped agents.
 
 \section{Simulation Results and Discussion}
 
-\subsection{Passenger distribution} % (fold)
+\subsection{Passenger Distribution} % (fold)
 
 If we plot the exited agents over a time axis for each exit, we can see that
-the boats tend to be filled in a sequential way (See Figure~\ref{distribution11} and~\ref{distribution33}).
-This means, a new boat mostly
-gets frequented if the old boat is already full.  This effect is very strong
-and good to see if we have only few passengers, but also if there are many, a
-tendency towards this can be observed. The only thing, that interferes with this 
-observation is, that at the beginning, two boats are filled at the same time.
-This is because some agents are placed so that they have a shorter distance to the left.
+the boats tend to be filled in a sequential way (see
+figure~\ref{distribution11} and~\ref{distribution33}).  This means that a new
+boat mostly gets frequented if the old boat is already full.  This effect is
+very strong and good to see if we have only few passengers, but also if there
+are many, a tendency towards this can be observed. The only thing that
+interferes with this observation is that at the beginning, two boats are filled
+at the same time.  This is because some agents are placed so that they have a
+shorter distance to the left.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/distribution11.eps}
-	\caption{Plot of the filling of the rescue Boats on a ship with 700 Agents, \(v_0=1.5\frac{m}{s}\).
+    \caption{Plot of the filling of the rescue boats on a ship with 700 agents,
+    \(v_0=1.5\frac{m}{s}\).
 	Each line represents a different rescue boat.}
 	\label{distribution11}
 \end{figure}
@@ -435,29 +437,30 @@ This is because some agents are placed so that they have a shorter distance to t
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/distribution33.eps}
-	\caption{Plot of the filling of the rescue Boats on a ship with 350 Agents, \(v_0=1.5\frac{m}{s}\).
+    \caption{Plot of the filling of the rescue boats on a ship with 350 agents,
+    \(v_0=1.5\frac{m}{s}\).
 	Each line represents a different rescue boat.}
 	\label{distribution33}
 \end{figure}
 
-Although there could be numerous
-reasons for this to happen, in reality a more distributed and parallel filling
-of the boats is expected.  The simulation is based on a model which takes the
-distance to the nearest exit as the indicator for the desired direction.  In
-reality, people want to get out of the ship the fastest way possible,
-especially if there are only limited capacities on the boats.  This suggests
-that the nearest exit is not the best strategy to get out fast.  On the
-specific geometry of the Costa Concordia, the corridor from bow to stern ends
-more on the starboard (right) side.  The agents follow the shortest path and
-start to jam up, while on the left there are no obstacles.
-Without regard to the beginning, two boats get used in parallel only if there are many agents.
-This can be explained by the jam, so people get pushed back towards the other 
-boat. Also, if a boat is empty, the Crowd can separate into two parts: One,
-that is nearer to the next boat on the same side and one, which was further
-away from the empty boat, which now has the nearest boat on the other side.
+Although there could be numerous reasons for this to happen, in reality a more
+distributed and parallel filling of the boats is expected.  The simulation is
+based on a model which takes the distance to the nearest exit as the indicator
+for the desired direction.  In reality, people want to get out of the ship the
+fastest way possible, especially if there are only limited capacities on the
+boats.  This suggests that the nearest exit is not the best strategy to get out
+fast.  On the specific geometry of the Costa Concordia, the corridor from bow
+to stern ends more on the starboard (right) side.  The agents follow the
+shortest path and start to jam up, while on the left there are no obstacles.
+Without regard to the beginning, two boats get used in parallel only if there
+are many agents.  This can be explained by the jam, so people get pushed back
+towards the other boat. Also, if a boat is empty, the crowd can separate into
+two parts: One that is nearer to the next boat on the same side and one which
+is farther away from the empty boat, which now has the nearest boat on the
+other side.
 
 The expectation for reality is that people would recognize that the nearest 
-boats take more time to reach than the ones further away. Thus, they would 
+boats take more time to reach than the ones farther away. Thus, they would 
 distribute more equally over the different boats.
 
 
@@ -468,65 +471,75 @@ distribute more equally over the different boats.
 \FloatBarrier % Figures shall stay in their subsection
 \subsection{Panic Level} % (fold)
 \label{sub:paniclevel}
-As described in \cite{helbing}, a bigger desired velocity \(v_0\) 
-can lead to longer times in evacuation.
-At a higher panic level, people want to go faster, but it can take longer to get out.
-When \(v_0\) is below \(1.5\frac{m}{s}\), we could reproduce the results of decreasing evacuation times
-both with many and few agents, as seen on Figures \ref{evactimes1to11} and \ref{evactimes23to33}.
+
+As described in \cite{helbing}, a greater desired velocity \(v_0\) can lead to
+longer evacuation times.  At a higher panic level, people want to go faster,
+but it can take longer to get out.  When \(v_0\) is below \(1.5\frac{m}{s}\),
+we could reproduce the results of decreasing evacuation times both with many
+and few agents, as seen in figures~\ref{evactimes1to11} and
+\ref{evactimes23to33}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/evactimes1to11.eps}
-	\caption{Evacuation times with 700 agents and varying \(v_0\) 	}
+	\caption{Evacuation times with 700 agents and varying \(v_0\).}
 	\label{evactimes1to11}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/evactimes23to33.eps}
-	\caption{Evacuation times with 350 agents and varying \(v_0\) 	}
+	\caption{Evacuation times with 350 agents and varying \(v_0\).}
 	\label{evactimes23to33}
 \end{figure}
 
-However, with higher values for \(v_0\), we could not reproduce the results, because
-agents got pushed into walls and remained stuck there. In Figure~\ref{evactimes1to11},
-we had two agents stuck in Walls at \(v_0 = 1.4\frac{m}{s}\), so we looked at the results,
-and set the finish time to the value, when the last agent before them left
-the ship. This introduces an error, which only gets bigger with higher values of \(v_0\).
+However, with higher values for \(v_0\), we could not reproduce the results,
+because agents got pushed into walls and remained stuck there. In
+figure~\ref{evactimes1to11}, we had two agents stuck in walls at \(v_0 =
+1.4\frac{m}{s}\), so we looked at the results and set the finish time to the
+value when the last agent before them left the ship. This introduces an error
+which only gets bigger with higher values of \(v_0\).
 
-To circumvent this, a simulation with a smaller time step was run, but even with the timestep 
-being a millisecond, we still got agents stuck in walls. An example is shown in Figure~\ref{stuckinwall}. This is a part during the simulation with \(v_0 = 3.8\frac{m}{s}\) and a timestep of a millisecond.
+To circumvent this, a simulation with a smaller time step was run, but even
+with the timestep being a millisecond, we still got agents stuck in walls. An
+example is shown in figure~\ref{stuckinwall}. This is a part during the
+simulation with \(v_0 = 3.8\frac{m}{s}\) and a timestep of a millisecond.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1]{images/StuckInWall.png}
-	\caption{Agents stuck in walls due to too high \(v_0\). Image was taken with \(v_0=3.8\frac{m}{s}\) :and a timestep of a millisecond.}
+    \caption{Agents stuck in walls due to too high \(v_0\). Image was taken
+    with \(v_0=3.8\frac{m}{s}\) and a timestep of a millisecond.}
 	\label{stuckinwall}
 \end{figure}
 
-A timestep of a millisecond means, that an agent, moving at five meters per second,
-goes a distance of 5 millimeters per timestep. Since the agents get pushed into walls
-at these rather precise steps of movement, an even smaller timestep will likely yield similar results. 
+A timestep of a millisecond means that an agent, moving at five meters per
+second goes a distance of 5 millimeters per timestep. Since the agents get
+pushed into walls at these rather precise steps of movement, an even smaller
+timestep will likely yield similar results. 
 
 
-Because of this, we cannot answer our question, whether a high panic level (which means a high value for \(v_0\))
-with few people
-or a low panic level with many people is faster, since on high panic levels, there are too many agents stuck, as seen in Figure~\ref{v0plotwallhang}. Instead, we try to find reasons for this outcome.
+Because of this, we cannot answer our question whether a high panic level
+(which means a high value for \(v_0\)) with few people or a low panic level
+with many people is faster, since on high panic levels there are too many
+agents stuck, as seen in figure~\ref{v0plotwallhang}. Instead, we try to find
+reasons for this outcome.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/v0plotwallhang.eps}
-	\caption{At high values for \(v_0\), not all 350 agents exit. The rest is stuck in walls.	}
+    \caption{At high values for \(v_0\), not all 350 agents exit. The rest is
+    stuck in walls.}
 	\label{v0plotwallhang}
 \end{figure}
 
-A timestep too big can be excluded from the reasons, as we have seen before.
-We chose the parameters to be the same as in \cite{helbing} on page 488.
-They have been found suitable to simulate people leaving a room.
-The difference to our case is, that we have more walls nearby and
-because of that, we get a situation where more pressure is applied from more sides. 
-Since that is a remarkable difference to the situation of a single room with one door, 
-it is plausible, that the parameters are not suited for high densities of people in 
+A timestep which is too big can be excluded from the reasons, as we have seen
+before.  We chose the parameters to be the same as in \cite{helbing} on page
+488.  They have been found suitable to simulate people leaving a room.  The
+difference to our case is that we have more walls nearby and because of that,
+we get a situation where more pressure is applied from more sides.  Since that
+is a remarkable difference to the situation of a single room with one door, it
+is plausible that the parameters are not suited for high densities of people in
 narrow places. 
 
 Of course, this could also be interpreted as people being hurt, but since
@@ -544,17 +557,19 @@ likely to trigger panics than other places.
 \subsection{Closed Exits} % (fold)
 \label{sub:Closed exits}
 
-In the simulation, two ways were defined to react to a full boat, as described in Section~\ref{sub:exitremove}.  First, there is an instantaneous update on the whole ship.  This is a model for an
-announcement over speakers over the whole ship.  The agents adapt their
-direction immediately, which can be seen on a video of the simulation.  This
-behavior is realistic in a case when the following conditions are met:
-There are not too many people and they aren't panicking.
+In the simulation, two ways were defined to react to a full boat, as described
+in Section~\ref{sub:exitremove}.  First, there is an instantaneous update on
+the whole ship.  This is a model for an announcement over speakers over the
+whole ship.  The agents adapt their direction immediately, which can be seen on
+a video of the simulation.  This behavior is realistic in a case when the
+following conditions are met: There are not too many people and they aren't
+panicking.
 
 The second way is that the information is spread in a circle around the exit.
-This shall model a simple communication between agents that takes time.  With
-this simple rule of updating the directions, the behavior is much more
+This is supposed to model simple communication between agents that takes time.
+With this simple rule of updating the directions, the behavior is much more
 realistic, even though the rule doesn't account for the number of people
-nearby.  This means that the information spreads, even if there is nobody.
+nearby.  This means that the information spreads even if there is nobody there.
 However, an interesting phenomenon during the updates can be observed:  While
 the people near the exit try to get to the next one, they get pushed back by
 the others who don't know of the change yet.
@@ -564,22 +579,26 @@ it's too slow, even an agent that escaped can be run against the border of the
 expansion circle.  This is then seen as the agent stopping, even if there is
 nothing blocking his path. That happens because the agent is faster than the
 expansion rate of the information. From observations in the simulation, we
-found \(0.5\frac{m}{s}\) to look mostly like we expected it, even though
-occasionally there are still some agents slowed down by the expansion rate.
-On the other hand, if the expansion rate is chosen too fast, the pushing effect
-is too small to meet the expected result of a panicking crowd.
+found \(0.5\frac{m}{s}\) to look mostly as we expected, even though
+occasionally there are still some agents slowed down by the expansion rate.  On
+the other hand, if the expansion rate is chosen too high, the pushing effect is
+too small to meet the expected result of a panicking crowd.
 
-However, the effect of the push-back on the evacuation time is clearly visible in Figure~\ref{evactimescomparemany} and \ref{evactimescomparefew}.
-In Figure~\ref{evactimescomparemany}, it was necessary again to correct the evacuation times 
-because of agents in walls as described in~\ref{sub:paniclevel}. 
-Two agents were stuck at the run \(v0 = 1.4\frac{m}{s}\) with radial propagation.
-In the runs with instantaneous propagation, one agent was stuck for \(1.3\frac{m}{s}\), two for \(1.4\frac{m}{s}\) and two for \(1.5\frac{m}{s}\).
+However, the effect of the push-back on the evacuation time is clearly visible
+in figures~\ref{evactimescomparemany} and \ref{evactimescomparefew}.  In
+figure~\ref{evactimescomparemany}, it was again necessary to correct the
+evacuation times because of agents in walls as described
+in~\ref{sub:paniclevel}.  Two agents were stuck at the run \(v0 =
+1.4\frac{m}{s}\) with radial propagation.  In the runs with instantaneous
+propagation, one agent was stuck for \(1.3\frac{m}{s}\), two for
+\(1.4\frac{m}{s}\) and two for \(1.5\frac{m}{s}\).
 
-Agents, that are informed instantaneously can adapt their way earlier and reduce the overall
-evacuation time. This expected result can be seen in both Figures. 
-The effect is smaller for less people. This fact is also expectable, because the space
-remains the same. If we have many people on the same amount of space going in different directions,
-they have to be slower to avoid collisions.
+Agents that are informed instantaneously can adapt their way earlier and
+reduce the overall evacuation time. This expected result can be seen in both
+figures.  The effect is smaller for less people. This fact is also expectable,
+because the space remains the same. If we have many people on the same amount
+of space going in different directions, they have to be slower to avoid
+collisions.
 
 \begin{figure}[h]
 	\centering
@@ -600,20 +619,23 @@ they have to be slower to avoid collisions.
 
 \section{Summary and Outlook}
 
-Even though we could not answer all our questions, we got some new
-knowledge that is needed to answer them. We found out, that the agents
-should not chose their direction by the shortest way to the next exit but by 
-the fastest expected exit time, which can mean to make a longer distance.
+Even though we could not answer all our questions, we got some new knowledge
+that is needed to answer them. We found out that the agents should not choose
+their direction by the shortest way to the next exit but by the fastest
+expected exit time, which can mean to go a longer distance.
 
-Regarding the Panic Level, we could not reproduce the ``faster-is-slower effect''\footnote{\cite{helbing}, p. 488, caption of figure 1}
-for higher panic levels. We mentioned possible reasons for this in Section~\ref{sub:paniclevel} and mentioned 
-the idea of taking hurt people into account.
+Regarding the panic level, we could not reproduce the ``faster-is-slower
+effect''\footnote{\cite{helbing}, p. 488, caption of figure 1} for higher panic
+levels. We mentioned possible reasons for this in section~\ref{sub:paniclevel}
+and mentioned the idea of taking hurt people into account.
 
-When an exit closed, we managed to get a realistic model with a very simple update rule. 
-We discussed also the weaknesses and limits of this rule.
+When an exit closed, we managed to get a realistic model with a very simple
+update rule.  We also discussed the weaknesses and limitations of this rule.
 
-All in all, we have laid out a base for simulating the evacuation of any place that has exits with limited capacities, as for example a cruise ship.
-We mentioned some points to take care of, so that people interested in doing simulations like this can avoid some problems.
+All in all, we have laid out a base for simulating the evacuation of any place
+that has exits with limited capacities, as for example a cruise ship.  We
+mentioned some points to take care of, so that people interested in doing
+simulations like this can avoid some problems.
 
 \newpage
 \section{References}
@@ -629,7 +651,7 @@ We mentioned some points to take care of, so that people interested in doing sim
 
 	\bibitem{multilevel}
 	\emph{Modelling Situations of Evacuation
-in a Multi-level Building} , 
+in a Multi-level Building}, 
 Hans Hardmeier, Andrin Jenal, Beat K\"ung, Felix Thaler, Zurich, April 2012
 
 	\bibitem{helbing}
@@ -696,7 +718,7 @@ Hans Hardmeier, Andrin Jenal, Beat K\"ung, Felix Thaler, Zurich, April 2012
 \lstinputlisting[caption=progressDestFields.m]{../../code/progressDestFields.m}
 \lstinputlisting[caption=simulate.m]{../../code/simulate.m}
 
-\subsection{C Code}
+\subsection{C Code (from \cite{multilevel})}
 
 \lstinputlisting[caption=fastSweeping.c]{../../code/fastSweeping.c}
 \lstinputlisting[caption=getNormalizedGradient.c]{../../code/getNormalizedGradient.c}
