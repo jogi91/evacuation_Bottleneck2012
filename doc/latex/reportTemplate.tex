@@ -2,6 +2,8 @@
 \usepackage{geometry}                
 \geometry{letterpaper}                   
 
+\usepackage{listings}
+\usepackage{color}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{epstopdf}
@@ -597,6 +599,59 @@ Hans Hardmeier, Andrin Jenal, Beat K\"ung, Felix Thaler, Zurich, April 2012
 \endgroup
 
 
+\section{Appendix}
+
+% set listing style:
+\definecolor{commentcolor}{RGB}{89, 168, 89}
+\definecolor{keywordcolor}{RGB}{68, 68, 255}
+\definecolor{stringcolor}{RGB}{205, 139, 247}
+\definecolor{numbercolor}{RGB}{128, 128, 128}
+\definecolor{bgcolor}{RGB}{245, 248, 253}
+\lstset{
+  language=Matlab,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=left,
+  numberstyle=\tiny\color{numbercolor},
+  stepnumber=2,
+  numbersep=5pt,
+  backgroundcolor=\color{bgcolor},
+  showspaces=false, 
+  showstringspaces=false,
+  showtabs=false,
+  frame=lines,
+  rulecolor=\color{black},
+  tabsize=2,
+  captionpos=b,
+  breaklines=true,
+  breakatwhitespace=true,
+  title=\lstname,
+  commentstyle=\color{commentcolor},
+  keywordstyle=\color{keywordcolor},
+  stringstyle=\color{stringcolor}
+}
+
+\subsection{MATLAB Code}
+
+\lstinputlisting[caption=addDesiredForces.m]{../../code/addDesiredForces.m}
+\lstinputlisting[caption=addInterAgentForces.m]{../../code/addInterAgentForces.m}
+\lstinputlisting[caption=addWallForces.m]{../../code/addWallForces.m}
+\lstinputlisting[caption=checkForIntersection.m]{../../code/checkForIntersection.m}
+\lstinputlisting[caption=createExitFields.m]{../../code/createExitFields.m}
+\lstinputlisting[caption=initAgents.m]{../../code/initAgents.m}
+\lstinputlisting[caption=initialize.m]{../../code/initialize.m}
+\lstinputlisting[caption=loadConfig.m]{../../code/loadConfig.m}
+\lstinputlisting[caption=placeAgents.m]{../../code/placeAgents.m}
+\lstinputlisting[caption=plotExitedAgents.m]{../../code/plotExitedAgents.m}
+\lstinputlisting[caption=plotFloor.m]{../../code/plotFloor.m}
+\lstinputlisting[caption=progressAgents.m]{../../code/progressAgents.m}
+\lstinputlisting[caption=progressDestFields.m]{../../code/progressDestFields.m}
+\lstinputlisting[caption=simulate.m]{../../code/simulate.m}
+
+\subsection{C Code}
+
+\lstinputlisting[caption=fastSweeping.c]{../../code/fastSweeping.c}
+\lstinputlisting[caption=getNormalizedGradient.c]{../../code/getNormalizedGradient.c}
+\lstinputlisting[caption=lerp2.c]{../../code/lerp2.c}
 
 \end{document}  
 
