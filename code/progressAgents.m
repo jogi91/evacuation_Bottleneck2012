@@ -41,20 +41,6 @@ for ai = 1:length(data.agents)
     if newpos(1) > floorW; newpos(1) = floorW; end
     if newpos(2) > floorH; newpos(2) = floorH; end
     
-    % If agent got into a wall, move him out:
-%     wdepth = data.agents(ai).r - lerp2(data.floor.wall_dist, newpos(2), newpos(1));
-%     if wdepth > 0
-%         % Calculate wall normal vector:
-%         ny = lerp2(data.floor.wall_dist_grad_x, oldpos(2), oldpos(1));
-%         nx = lerp2(data.floor.wall_dist_grad_y, oldpos(2), oldpos(1));
-%         normal = [nx ny];
-%         
-%         % Remove perpendicular velocity component:
-% %         newvel = newvel - dot(normal, newvel) / dot(normal,normal) * normal;
-%         % Move him out:
-%         newpos = newpos + normal * wdepth;
-%     end
-    
     % Apply new state:
     data.agents(ai).v = newvel;
     data.agents(ai).p = newpos;
