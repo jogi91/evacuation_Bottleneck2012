@@ -8,6 +8,7 @@
 %\usepackage{natbib}
 \usepackage{amssymb, amsmath}
 \usepackage{hyperref}
+\usepackage{placeins}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 %\title{Title}
@@ -377,8 +378,8 @@ different approaches which can be chosen in the configuration file.
 The first one simply recalculates the entire vector field when an exit is
 closed with the Fast Sweeping method, just like in the initilization, but with
 the full exits removed.  The update is instantaneous, so every agent on the
-entire ship reacts to it immediately.  This is somewhat unrealistic, which is
-why we came up with the second method.
+entire ship reacts to it immediately.  This can be unrealistic under certain
+conditions, which is why we came up with the second method.
 
 Instead of updating the entire vector field right away, we can just calculate
 the updated field and use that to update growing regions.  To be exact, when an
@@ -462,11 +463,13 @@ distribute more equally over the different boats.
 
 % subsection Passenger distribution (end)
 
+\FloatBarrier % Figures shall stay in their subsection
 \subsection{Panic Level} % (fold)
+\label{sub:paniclevel}
 As described in \cite{helbing}, a bigger desired velocity \(v_0\) 
 can lead to longer times in evacuation.
 At a higher panic level, people want to go faster, but it can ake longer to get out.
-When \(v_0\) is below 1.5m/s, we could reproduce the results of decreasing evacuation times
+When \(v_0\) is below \(1.5\frac{m}{s}\), we could reproduce the results of decreasing evacuation times
 both with many and few agents, as seen on Figures \ref{evactimes1to11} and \ref{evactimes23to33}.
 
 \begin{figure}[h]
@@ -485,19 +488,18 @@ both with many and few agents, as seen on Figures \ref{evactimes1to11} and \ref{
 
 However, with higher values for \(v_0\), we could not reproduce the results, because
 agents got pushed into walls and remained stuck there. In Figure~\ref{evactimes1to11},
-we had two agents stuck in Walls at \(v_0 = 1.4m/s\), so we looked at the results,
+we had two agents stuck in Walls at \(v_0 = 1.4\frac{m}{s}\), so we looked at the results,
 and set the finish time to the value, when the last agent before them left
 the ship. This introduces an error, which only gets bigger with higher values of \(v_0\).
 
 To circumvent this, a simulation with a smaller timestep was run, but even with the timestep 
-being a millisecond, we still got agents stuck in walls. An example is shown in Figure~\ref{stuckinwall}. This is a part during the simulation with \(v_0 = 3.8m/s\) and a timestep of a millisecond.
+being a millisecond, we still got agents stuck in walls. An example is shown in Figure~\ref{stuckinwall}. This is a part during the simulation with \(v_0 = 3.8\frac{m}{s}\) and a timestep of a millisecond.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1]{images/StuckInWall.png}
 	\caption{Agents stuck in walls due to too high \(v_0\). Image was taken with \(v_0=3.8\frac{m}{s}\) :and a timestep of a millisecond.}
 	\label{stuckinwall}
-	
 \end{figure}
 
 A timestep of a millisecond means, that an agent, moving at five meters per second,
@@ -505,9 +507,16 @@ goes a distance of 5 millimeters per timestep. Since the agents get pushed into 
 at these rather precise steps of movement, an even smaller timestep will likely yield similar results. 
 
 
-Since we cannot answer our question, wether a high panic level (which means a high value for \(v_0\))
+Because of this, we cannot answer our question, wether a high panic level (which means a high value for \(v_0\))
 with few people
-or a low panic level with many people is faster, we try to find reasons for this outcome.
+or a low panic level with many people is faster, since on high panic levels, there are too many agents stuck, as seen in Figure~\ref{v0plotwallhang}. Instead, we try to find reasons for this outcome.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/v0plotwallhang.eps}
+	\caption{At high values for \(v_0\), not all 350 agents exit. The rest is stuck in walls.	}
+	\label{v0plotwallhang}
+\end{figure}
 
 A timestep too big can be excluded from the reasons, as we have seen before.
 We chose the parameters to be the same as in \cite{helbing} on page 488.
@@ -529,15 +538,15 @@ likely to trigger panics than other places.
 
 
 % subsection Panic Level (end)
+\FloatBarrier % Figures shall stay in their subsection
 \subsection{Closed Exits} % (fold)
 \label{sub:Closed exits}
 
-In the simulation, two ways were defined to react to a full boat.  First, there
-was an instantanous update on the whole ship.  This is a model for an
+In the simulation, two ways were defined to react to a full boat, as described in Section~\ref{sub:exitremove}.  First, there is an instantanous update on the whole ship.  This is a model for an
 announcement over speakers over the whole ship.  The agents adapt their
 direction immediately, which can be seen on a video of the simulation.  This
-behaviour is realistic in a case when there are not too many people who aren't
-panicking.
+behaviour is realistic in a case when the following conditions are met:
+There are not too many people and they aren't panicking.
 
 The second way is that the information is spread in a circle around the exit.
 This shall model a simple communication between agents that takes time.  With
@@ -555,13 +564,37 @@ nothing blocking his path. That happens because the agent is faster than the
 expansion rate of the information. From observations in the simulation, we
 found \(0.5\frac{m}{s}\) to look mostly like we expected it, even though
 occasionally there are still some agents slowed down by the expansion rate.
+On the other hand, if the expansion rate is chosen too fast, the pushing effect
+is too small to meet the expected result of a panicking crowd.
 
-The effect of the pushback on the evacuation time is very small, because of
-numerous bottlenecks before the actual exit.
+However, the effect of the pushback on the evacuation time is clearly visible in Figure~\ref{evactimescomparemany} and \ref{evactimescomparefew}.
+In Figure~\ref{evactimescomparemany}, it was necessary again to correct the evacuation times 
+because of agents in walls as described in~\ref{sub:paniclevel}. 
+Two agents were stuck at the run \(v0 = 1.4\frac{m}{s}\) with radial propagation.
+In the runs with instantanous propagation, one agent was stuck for \(1.3\frac{m}{s}\), two for \(1.4\frac{m}{s}\) and two for \(1.5\frac{m}{s}\).
 
-TODO: PLOT EINFÜGEN
+Agents, that are informed instantanously can adapt their way earlier and reduce the overall
+evacuation time. This expected result can be seen in both Figures. 
+The effect is smaller for less people. This fact is also expectable, because the space
+remains the same. If we have many people on the same amount of space going in different directions,
+they have to be slower to avoid collisions.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/evactimescomparemany.eps}
+	\caption{Comparison of evacuation times with 700 agents and varying \(v_0\) with instantanous or radial update. 	}
+	\label{evactimescomparemany}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/evactimescomparefew.eps}
+	\caption{Comparison of evacuation times with 350 agents and varying \(v_0\) with instantanous or radial update. 	}
+	\label{evactimescomparefew}
+\end{figure}
 
 % subsection Closed exits (end)
+\FloatBarrier % Figures shall stay in their subsection
 
 \section{Summary and Outlook}
 
