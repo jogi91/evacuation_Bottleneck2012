@@ -1,4 +1,4 @@
-reportTemplate.aux
-reportTemplate.log
-reportTemplate.out
-reportTemplate.toc
+*.aux
+*.log
+*.out
+*.toc

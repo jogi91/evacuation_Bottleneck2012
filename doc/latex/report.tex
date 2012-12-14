@@ -122,13 +122,13 @@ mechanisms for the simulation, so that the data could be used for analysis.
 In January 2012, the Costa Concordia hit a rock and ran aground\cite{bbcnews}.
 This event got great media attention for a long time so we decided to take a
 closer look at the evacuation of a cruise ship.  The question is, what is the
-best stratgy to leave the ship?  This question should for sure be answered with
+best strategy to leave the ship?  This question should for sure be answered with
 one of the emergency drills, but it is always good to have some background
 knowledge.
 
 So, our key questions are: Which is the best strategy for evacuation concerning
 the choice of the way towards the rescue boats. Should all passengers
-dirstribute equally over the entries, or is there a better one? Also, which one
+distribute equally over the entries, or is there a better one? Also, which one
 takes longer: a high panic level on a nearly empty ship or a low panic level on
 a very full ship. What happens, if a boat suddenly is inoperable? How can the
 reaction be optimized?
@@ -154,11 +154,11 @@ simple agent based modeling solution as described in \cite{helbing}.  A
 passenger is treated as a particle.  It has a mass, and there are physical and
 social forces, accelerating that mass so that it cannot always follow its
 desired direction.  The desired direction is implemented as the shortest path
-to the nearest exit.  For the exact formulae for the forces see
+to the nearest exit.  For the exact formulas for the forces see
 section~\ref{sub:movement}.
 
 The floor is given by a deck plan for the Costa Voyager \cite{costa}. Since
-these deck plans usually are made for advertisment purposes, it is to be
+these deck plans usually are made for advertisement purposes, it is to be
 expected that they are not absolutely accurate.  So during image processing for
 simplification of this plan, a few further assumptions were made, mainly about
 the actual sizes and capacities.  We won't list them all here, because they are
@@ -166,7 +166,7 @@ also in the configuration files.
 
 The last element of additional complexity was added to get an idea of how the
 closing of an exit works.  A switch was added to decide whether every agent
-should know instantanously about the closed exit or if the knowledge spreads
+should know instantaneously about the closed exit or if the knowledge spreads
 over time.  The technical aspect of this is further explained in
 section~\ref{sub:exitremove}.
 
@@ -187,7 +187,7 @@ lead to problems if the image is processed with automatic or semiautomatic
 image manipulation programs, since only a minor difference in color can prevent
 the generation of the desired data.  In \cite{airplane}, the image format is
 even more simple.  There is only a bitmap image read into MATLAB.  Since the
-bitmap images can use a colormap, MATLAB doesn't use 3 channels but a unique
+bitmap images can use a color map, MATLAB doesn't use 3 channels but a unique
 number for each color in an image matrix to give every pixel its color.  This
 has the same problem as the PNG solution regarding how exactly the colors have
 to be set, but the different parts of the image can be separated with less
@@ -196,7 +196,7 @@ code.
 We took the best of both solutions. We used the PNG-format with indexed colors.
 So we have the most flexibility with very little usage of disk space.  There is
 no special ``wall color'' or anything like that, just a simple rule how the
-colormap is read: Color 0 of the map specifies walls, color 1 free space.
+color map is read: Color 0 of the map specifies walls, color 1 free space.
 Then, there can be any number of spawn zones.  Spawn zones are the areas in the
 image, where new agents can be placed. With different spawn zones, it is
 possible to account for different situations: A ballroom is different from a
@@ -211,9 +211,9 @@ own parameters or can even be handled specially in the program's code.
 	\label{gimpscreenshot}
 	
 \end{figure}
-To manipulate the colormap, any slightly sophisticated image manipulation
+To manipulate the color map, any slightly sophisticated image manipulation
 program should suffice. We used the free software Gimp \cite{gimp}. It has a
-very convenient command which allows the user to rearrange the colormap. This
+very convenient command which allows the user to rearrange the color map. This
 is shown in figure~\ref{gimpscreenshot}.
 
 \subsection{The Simulation Routines}
@@ -276,7 +276,7 @@ a random radius.
 \label{sub:movement}
 
 To simulate the movement of the agents in this physical model, different forces
-need to be calculated in every step on every agent.  All of the force formulae
+need to be calculated in every step on every agent.  All of the force formulas
 have been taken from \cite{helbing}.  These forces have been separated into the
 following functions which are called by \texttt{simulate}:
 
@@ -378,7 +378,7 @@ use to find the nearest exit.  For this update we modeled and implemented two
 different approaches which can be chosen in the configuration file.
 
 The first one simply recalculates the entire vector field when an exit is
-closed with the Fast Sweeping method, just like in the initilization, but with
+closed with the Fast Sweeping method, just like in the initialization, but with
 the full exits removed.  The update is instantaneous, so every agent on the
 entire ship reacts to it immediately.  This can be unrealistic under certain
 conditions, which is why we came up with the second method.
@@ -452,7 +452,7 @@ more on the starboard (right) side.  The agents follow the shortest path and
 start to jam up, while on the left there are no obstacles.
 Without regard to the beginning, two boats get used in parallel only if there are many agents.
 This can be explained by the jam, so people get pushed back towards the other 
-boat. Also, if a boat is empty, the Crowd can seperate into two parts: One,
+boat. Also, if a boat is empty, the Crowd can separate into two parts: One,
 that is nearer to the next boat on the same side and one, which was further
 away from the empty boat, which now has the nearest boat on the other side.
 
@@ -470,7 +470,7 @@ distribute more equally over the different boats.
 \label{sub:paniclevel}
 As described in \cite{helbing}, a bigger desired velocity \(v_0\) 
 can lead to longer times in evacuation.
-At a higher panic level, people want to go faster, but it can ake longer to get out.
+At a higher panic level, people want to go faster, but it can take longer to get out.
 When \(v_0\) is below \(1.5\frac{m}{s}\), we could reproduce the results of decreasing evacuation times
 both with many and few agents, as seen on Figures \ref{evactimes1to11} and \ref{evactimes23to33}.
 
@@ -494,7 +494,7 @@ we had two agents stuck in Walls at \(v_0 = 1.4\frac{m}{s}\), so we looked at th
 and set the finish time to the value, when the last agent before them left
 the ship. This introduces an error, which only gets bigger with higher values of \(v_0\).
 
-To circumvent this, a simulation with a smaller timestep was run, but even with the timestep 
+To circumvent this, a simulation with a smaller time step was run, but even with the timestep 
 being a millisecond, we still got agents stuck in walls. An example is shown in Figure~\ref{stuckinwall}. This is a part during the simulation with \(v_0 = 3.8\frac{m}{s}\) and a timestep of a millisecond.
 
 \begin{figure}[h]
@@ -509,7 +509,7 @@ goes a distance of 5 millimeters per timestep. Since the agents get pushed into 
 at these rather precise steps of movement, an even smaller timestep will likely yield similar results. 
 
 
-Because of this, we cannot answer our question, wether a high panic level (which means a high value for \(v_0\))
+Because of this, we cannot answer our question, whether a high panic level (which means a high value for \(v_0\))
 with few people
 or a low panic level with many people is faster, since on high panic levels, there are too many agents stuck, as seen in Figure~\ref{v0plotwallhang}. Instead, we try to find reasons for this outcome.
 
@@ -544,15 +544,15 @@ likely to trigger panics than other places.
 \subsection{Closed Exits} % (fold)
 \label{sub:Closed exits}
 
-In the simulation, two ways were defined to react to a full boat, as described in Section~\ref{sub:exitremove}.  First, there is an instantanous update on the whole ship.  This is a model for an
+In the simulation, two ways were defined to react to a full boat, as described in Section~\ref{sub:exitremove}.  First, there is an instantaneous update on the whole ship.  This is a model for an
 announcement over speakers over the whole ship.  The agents adapt their
 direction immediately, which can be seen on a video of the simulation.  This
-behaviour is realistic in a case when the following conditions are met:
+behavior is realistic in a case when the following conditions are met:
 There are not too many people and they aren't panicking.
 
 The second way is that the information is spread in a circle around the exit.
 This shall model a simple communication between agents that takes time.  With
-this simple rule of updating the directions, the behaviour is much more
+this simple rule of updating the directions, the behavior is much more
 realistic, even though the rule doesn't account for the number of people
 nearby.  This means that the information spreads, even if there is nobody.
 However, an interesting phenomenon during the updates can be observed:  While
@@ -569,13 +569,13 @@ occasionally there are still some agents slowed down by the expansion rate.
 On the other hand, if the expansion rate is chosen too fast, the pushing effect
 is too small to meet the expected result of a panicking crowd.
 
-However, the effect of the pushback on the evacuation time is clearly visible in Figure~\ref{evactimescomparemany} and \ref{evactimescomparefew}.
+However, the effect of the push-back on the evacuation time is clearly visible in Figure~\ref{evactimescomparemany} and \ref{evactimescomparefew}.
 In Figure~\ref{evactimescomparemany}, it was necessary again to correct the evacuation times 
 because of agents in walls as described in~\ref{sub:paniclevel}. 
 Two agents were stuck at the run \(v0 = 1.4\frac{m}{s}\) with radial propagation.
-In the runs with instantanous propagation, one agent was stuck for \(1.3\frac{m}{s}\), two for \(1.4\frac{m}{s}\) and two for \(1.5\frac{m}{s}\).
+In the runs with instantaneous propagation, one agent was stuck for \(1.3\frac{m}{s}\), two for \(1.4\frac{m}{s}\) and two for \(1.5\frac{m}{s}\).
 
-Agents, that are informed instantanously can adapt their way earlier and reduce the overall
+Agents, that are informed instantaneously can adapt their way earlier and reduce the overall
 evacuation time. This expected result can be seen in both Figures. 
 The effect is smaller for less people. This fact is also expectable, because the space
 remains the same. If we have many people on the same amount of space going in different directions,
@@ -584,14 +584,14 @@ they have to be slower to avoid collisions.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/evactimescomparemany.eps}
-	\caption{Comparison of evacuation times with 700 agents and varying \(v_0\) with instantanous or radial update. 	}
+	\caption{Comparison of evacuation times with 700 agents and varying \(v_0\) with instantaneous or radial update. 	}
 	\label{evactimescomparemany}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.5]{images/evactimescomparefew.eps}
-	\caption{Comparison of evacuation times with 350 agents and varying \(v_0\) with instantanous or radial update. 	}
+	\caption{Comparison of evacuation times with 350 agents and varying \(v_0\) with instantaneous or radial update. 	}
 	\label{evactimescomparefew}
 \end{figure}
 
@@ -600,7 +600,7 @@ they have to be slower to avoid collisions.
 
 \section{Summary and Outlook}
 
-Eventhough we could not answer all our questions, we got some new
+Even though we could not answer all our questions, we got some new
 knowledge that is needed to answer them. We found out, that the agents
 should not chose their direction by the shortest way to the next exit but by 
 the fastest expected exit time, which can mean to make a longer distance.
