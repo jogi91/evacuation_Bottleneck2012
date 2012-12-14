@@ -367,6 +367,21 @@ The circle-shaped destination field update is implemented in
 \subsection{Output and Plotting}
 \label{sub:output}
 
+Our program has two plotting functions:
+
+\texttt{plotFloor} draws the ship's layout and all the agents on it in the
+current simulation state.  It is called from \texttt{simulate} in every loop
+iteration and the resulting picture is saved to \texttt{code/frames/}, but only
+if the option for saving frames has been enabled in the configuration file.
+
+\texttt{plotExitedAgents} is called at the end of the simulation and creates
+time series plots of the rescue boat occupations.
+
+Also the program saves its entire state data object to a file in
+\texttt{code/frames/} at the end, which includes other information as well,
+such as the time needed for all agents to reach the exits and the time series
+of the total escaped agents.
+
 \section{Simulation Results and Discussion}
 
 \section{Summary and Outlook}

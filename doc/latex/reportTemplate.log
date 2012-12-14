@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.29)  14 DEC 2012 10:28
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2012.2.29)  14 DEC 2012 10:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -443,34 +443,28 @@ Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no ¼ in font cmr12!
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 401.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 416.
  [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 401.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 416.
  (./reportTemplate.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 401.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 401.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 416.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 416.
+Package rerunfilecheck Info: File `reportTemplate.out' has not changed.
+(rerunfilecheck)             Checksum: 3C22E99C79E7332BF89D923B06B4E826;1109.
 
-
-Package rerunfilecheck Warning: File `reportTemplate.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `reportTemplate.out':
-(rerunfilecheck)             Before: 77809CD25F4F63AC55E41FE83C05328E;1096
-(rerunfilecheck)             After:  3C22E99C79E7332BF89D923B06B4E826;1109.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 401.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 416.
  ) 
 Here is how much of TeX's memory you used:
  6354 strings out of 494977
  90736 string characters out of 3179721
- 180059 words of memory out of 3000000
+ 180073 words of memory out of 3000000
  9427 multiletter control sequences out of 15000+200000
  14646 words of font info for 57 fonts, out of 3000000 for 9000
  36 hyphenation exceptions out of 8191
- 42i,10n,28p,337b,436s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,10n,28p,337b,401s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/publi
@@ -485,7 +479,7 @@ dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.p
 fb>
-Output written on reportTemplate.pdf (10 pages, 239226 bytes).
+Output written on reportTemplate.pdf (10 pages, 240282 bytes).
 PDF statistics:
  248 PDF objects out of 1000 (max. 8388607)
  214 compressed objects within 3 object streams
