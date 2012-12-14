@@ -332,10 +332,37 @@ for too high step-sizes or too strong force parameters.
 Without this, the simulation of some agents might get out of control if they
 get too close to walls or to other agents and behave in unphysical ways.
 
+This function also checks whether some agents have entered a non-full exit zone
+(a rescue boat) and if the exit got full from them, it closes that one.  What
+exactly happens then is explained in the next section.
+
 \end{description}
 
 \subsubsection{Removing Filled Exits}
 \label{sub:exitremove}
+
+In our model we have several exit zones, each with a maximum capacity (since
+they are rescue boats with limited size).  Because of that the simulation needs
+to take it into account when one of them gets filled: It needs to remove the
+exit and update the vector fields for the desired velocities which the agents
+use to find the nearest exit.  For this update we modeled and implemented two
+different approaches which can be chosen in the configuration file.
+
+The first one simply recalculates the entire vector field when an exit is
+closed with the Fast Sweeping method, just like in the initilization, but with
+the full exits removed.  The update is instantaneous, so every agent on the
+entire ship reacts to it immediately.  This is somewhat unrealistic, which is
+why we came up with the second method.
+
+Instead of updating the entire vector field right away, we can just calculate
+the updated field and use that to update growing regions.  To be exact, when an
+exit closes, a circle starts growing around at a configurable rate, and in this
+area the new destination vector field is used.  That way, at first only agents
+close to that exit react to the change, then over time the more distant agents
+also ``notice'' the filled exit and go for a different one.
+
+The circle-shaped destination field update is implemented in
+\texttt{progressDestFields}.
 
 \subsection{Output and Plotting}
 \label{sub:output}
