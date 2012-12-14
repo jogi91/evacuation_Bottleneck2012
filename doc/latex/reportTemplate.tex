@@ -176,6 +176,71 @@ In Reality, at least a few people would recognize that and avoid the jam.
 % subsection Passenger distribution (end)
 
 \subsection{Panic Level} % (fold)
+As described in \cite{helbing}, a bigger desired velocity \(v_0\) 
+can lead to longer times in evacuation.
+At a higher panic level, people want to go faster, but it can ake longer to get out.
+When \(v_0\) is below 1.5m/s, we could reproduce the results of decreasing evacuation times
+both with many and few agents, as seen on Figures \ref{evactimes1to11} and \ref{evactimes23to33}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/gimp.png}
+	\caption{Platzhalter}
+	\label{evactimes1to11}
+	
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/gimp.png}
+	\caption{Platzhalter}
+	\label{evactimes23to33}
+	
+\end{figure}
+
+However, with higher values for \(v_0\), we could not reproduce the results, because
+agents got pushed into walls and remained stuck there. In Figure~\ref{evactimes1to11},
+we had two agents stuck in Walls at \(v_0 = 1.4m/s\), so we looked at the results,
+and set the finish time to the value, when the last agent before them left
+the ship. This introduces an error, which only gets bigger with higher values of \(v_0\).
+
+To circumvent this, a simulation with a smaller timestep was run, but even with the timestep 
+being a millisecond, we still got agents stuck in walls. An example is shown in Figure~\ref{stuckinwall}. This is a part during the simulation with \(v_0 = 3.8m/s\) and a timestep of a millisecond.
+
+A timestep of a millisecond means, that an agent, moving at five meters per second,
+goes a distance of 5 millimeters per timestep. Since the agents get pushed into walls
+at these rather precise steps of movement, an even smaller timestep will likely yield similar results. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/gimp.png}
+	\caption{Platzhalter}
+	\label{stuckinwall}
+	
+\end{figure}
+
+Since we cannot answer our question, wether a high panic level (which means a high value for \(v_0\))
+with few people
+or a low panic level with many people is faster, we try to find reasons for this outcome.
+
+A timestep too big can be excluded from the reasons, as we have seen before.
+We chose the parameters to be the same as in \cite{helbing} on page 488.
+They have been found suitable to simulate people leaving a room.
+The difference to our case is, that we have more walls nearby and
+because of that, we get a situation where more pressure is applied from more sides. 
+Since that is a remarkable difference to the situation of a single room with one door, 
+it is plausible, that the parameters are not suited for high densities of people in 
+narrow places. 
+
+Of course, this could also be interpreted as people being hurt, but since
+we did not take this into account for our model, no relevant statements can
+be made. It should be part of a next simulation to account for the sum of 
+physical forces acting upon an agent. If they are too big, the agent gets hurt.
+In our case, this would be a realistic assumption, since a ship with limited
+exit possibilities can make the people feel trapped rather fast and is so more
+likely to trigger panics than other places.
+
+
 
 % subsection Panic Level (end)
 \subsection{Closed exits} % (fold)
