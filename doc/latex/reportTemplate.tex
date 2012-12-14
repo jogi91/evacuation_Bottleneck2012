@@ -413,10 +413,31 @@ of the total escaped agents.
 \subsection{Passenger distribution} % (fold)
 
 If we plot the exited agents over a time axis for each exit, we can see that
-the boats tend to be filled in a sequential way.  This means, a new boat only
+the boats tend to be filled in a sequential way (See Figure~\ref{distribution11} and~\ref{distribution33}).
+This means, a new boat mostly
 gets frequented if the old boat is already full.  This effect is very strong
 and good to see if we have only few passengers, but also if there are many, a
-tendency towards this can be observed.  Although there could be numerous
+tendency towards this can be observed. The only thing, that interferes with this 
+observation is, that at the beginning, two boats are filled at the same time.
+This is because some agents are placed so that they have a shorter distance to the left.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/distribution11.eps}
+	\caption{Plot of the filling of the rescue Boats on a ship with 700 Agents, \(v_0=1.5\frac{m}{s}\).
+	Each line represents a different rescue boat.}
+	\label{distribution11}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/distribution33.eps}
+	\caption{Plot of the filling of the rescue Boats on a ship with 350 Agents, \(v_0=1.5\frac{m}{s}\).
+	Each line represents a different rescue boat.}
+	\label{distribution33}
+\end{figure}
+
+Although there could be numerous
 reasons for this to happen, in reality a more distributed and parallel filling
 of the boats is expected.  The simulation is based on a model which takes the
 distance to the nearest exit as the indicator for the desired direction.  In
@@ -425,8 +446,20 @@ especially if there are only limited capacities on the boats.  This suggests
 that the nearest exit is not the best strategy to get out fast.  On the
 specific geometry of the Costa Concordia, the corridor from bow to stern ends
 more on the starboard (right) side.  The agents follow the shortest path and
-start to jam up, while on the left there are no obstacles.  In reality, at
-least a few people would recognize that and avoid the jam.
+start to jam up, while on the left there are no obstacles.
+Without regard to the beginning, two boats get used in parallel only if there are many agents.
+This can be explained by the jam, so people get pushed back towards the other 
+boat. Also, if a boat is empty, the Crowd can seperate into two parts: One,
+that is nearer to the next boat on the same side and one, which was further
+away from the empty boat, which now has the nearest boat on the other side.
+
+The expectation for reality is that people would recognize that the nearest 
+boats take more time to reach than the ones further away. Thus, they would 
+distribute more equally over the different boats.
+
+
+
+
 % subsection Passenger distribution (end)
 
 \subsection{Panic Level} % (fold)
