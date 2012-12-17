@@ -3,6 +3,8 @@
 \usepackage{lmodern}
 \usepackage{graphicx} 
 \usepackage[absolute,overlay]{textpos}
+\usepackage{hyperref}
+\usepackage{epstopdf}
 
 \setbeamercolor{framesource}{fg=black}
 \setbeamerfont{framesource}{size=\tiny}
@@ -17,7 +19,7 @@
 \title{Evacuation Bottleneck}
 \subtitle{Simulating a Panic on a Cruise Ship}
 \author{Johannes Weinbuch, Benedek Vartok}
-\date{}
+\date{\today}
 
 \begin{document}
 \frame{\titlepage}
@@ -122,28 +124,69 @@
 			\item Weakness in the model
 			\item More realistic: go for the shortest individual evacuation time
 		\end{itemize}
+		\item realistic update for propagation of information
+		\item Video
 	\end{itemize}
 \end{frame}
+
 
 \subsection{Panic Level}
 \begin{frame}
+	\frametitle{Effect of desired speed to the overall evacuation time}
+	\begin{columns}
+		\begin{column}{5cm}
+			\begin{itemize}
+				\item We could reproduce the results from Helbing, Farkas and Vicsek for low panic levels
+				\item High panic levels: problem!
+			\end{itemize}
+		\end{column}
+		\begin{column}{5cm}
+			\begin{figure}
+				\includegraphics[width=5cm]{images/evactimes1to11.eps}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\subsection{Outtakes}
+
+\begin{frame}
+	\frametitle{All the things you don't want to happen}
 	\begin{itemize}
-		\item TODO: more plots and explanations
+		\item Agents were stuck in Walls
+		\begin{itemize}
+			\item Even the tiniest timesteps didn't help
+		\end{itemize}
+		\item MATLAB does not behave as expected in batch mode
+		\begin{itemize}
+			\item Simulation works in foreground, crashes in background
+			\item No error message, just silently writing crashdumps to home
+		\end{itemize}
+		\item No reproducability even with fixed random seed in our group
+		\begin{itemize}
+			\item Different versions of MATLAB
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\subsection{Summary and Outlook}
+
+\section{Summary and Outlook}
 \begin{frame}
+	\frametitle{Some points to take away}
 	\begin{itemize}
-		\item TODO: tell how good and/or bad we did
+		\item The basic results could be reproduced
+		\item The model is not very well suited for multiple exits
+		\begin{itemize}
+			\item There should be a heuristic to decide for a direction
+		\end{itemize}
+		\item Use the power of Open Source Software (OSS)!
 	\end{itemize}
 \end{frame}
 
-\section{Outtakes}
-
 \begin{frame}
+	\frametitle{You ask -- We answer}
 	\begin{itemize}
-		\item TODO: MATLAB -- how we love it!
+		\item Now it's your turn
 	\end{itemize}
 \end{frame}
 
