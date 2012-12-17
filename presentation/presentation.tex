@@ -84,31 +84,88 @@
 	\source{http://www.kreuzfahrtberater.de}
 \end{frame}
 
+%Benedek
 \begin{frame}
+	\frametitle{Configuration File}
 	\begin{itemize}
-		\item TODO: config file
+		\item Simulation parameters intialized from a file:
+			\begin{itemize}
+				\item Deck configuration
+					% deck image file to use, pixel_per_meter setting;
+					% number of spawning and exiting zones,
+					% number of agents to spawn and exit capacities
+				\item Plotting options
+					% whether to store frames
+				\item Physical and behavioral parameters
+					% of simulation and agents, such as time-step and
+					% panic level
+			\end{itemize}
+		\item Simple syntax makes automated generation easy
+			% to sweep over a range of parameters
 	\end{itemize}
 \end{frame}
 
+%Benedek
 \subsection{Forces}
+	% physical simlulation in continous space ==> Newtonian model with forces
 \begin{frame}
+	\frametitle{Forces}
 	\begin{itemize}
-		\item TODO: desired, agent-, wall-forces
+		\item As described in Helbing's paper ``Simulating dynamical features
+		      of escape panic''
+		\item Three main forces act on agents:
+			\begin{itemize}
+				\item Desired direction
+					% agents try to achieve a velocity vector pointing in
+					% the direction of the nearest open exit
+				\item Repulsion \& friction between agents
+					% they don't want to get too close to each other,
+					% "social force";
+					% if they touch, they need to be separated physically and
+					% some friction appears
+				\item Repulsion \& friction from walls
+					% same as other agents, walls are avoided
+			\end{itemize}
 	\end{itemize}
+	% TODO: sketch
 \end{frame}
 
+%Benedek
 \subsection{Filled Exits}
 \begin{frame}
+	\frametitle{Filled Exits}
 	\begin{itemize}
-		\item TODO: exits
+		\item Rescue boats modeled with limited capacities
+		\item If a boat gets full, agents need to be informed
+		\item Two implementation approaches:
+			\begin{itemize}
+				\item Instantaneous update
+					% every agent knows about the closed exit immediately
+					% and updates his desired path accordingly
+				\item Gradual circle-shaped spreading of information
+					% modelling slow communication between agents;
+					% new information starts spreading from the exit zone
+					% outwards
+			\end{itemize}
 	\end{itemize}
+	% TODO: sketch
 \end{frame}
 
 \section{Implementation}
+% TODO (not all):
+%       - restructure Model/Implementation in presentation
+%       - code reuse
+%       - main loop
+%       - spawning new agents
+%       - removing exited agents
+%       - proceeding agents
+%       - updating desired vector fields
+%       - plotting
 
+%Benedek
 \begin{frame}
 	\begin{itemize}
-		\item TODO: we reused code from Multilevel Evacuation
+		\item TODO
 	\end{itemize}
 \end{frame}
 
