@@ -53,10 +53,37 @@
 	\source{http://www.shipspotting.com, Picture taken by Roy Batty}
 \end{frame}
 
-\section{Our Model}
+%Benedek
+\section{Models and Implementation}
+
+\subsection{Program Structure}
+\begin{frame}
+	\frametitle{Program Structure}
+	\begin{enumerate}
+		\item Load configuration
+			% initialization from file
+		\item Loop over simulation steps
+			% depending on timestep and maximum duration
+		\begin{enumerate}
+			\item Place new agents
+				% in spawn zones, if there are any left
+			\item Handle filled exits
+				% when agents fill up a rescue boat
+			\item Progress agents with calculated forces
+			\item Remove exited agents
+				% when agent reaches boat, he leaves simulation
+			\item Plot current state (optional)
+				% show layout with agents
+		\end{enumerate}
+		\item Plot and save final data
+			% show time series of rescue boat occupations
+	\end{enumerate}
+	% in the following slides we will go into
+	% the more interesting points in detail
+\end{frame}
 
 %Johannes
-\subsection{Input}
+\subsection{Input, Configuration}
 \begin{frame}
 	\frametitle{The Deck Plan}
 	\begin{columns}
@@ -91,7 +118,7 @@
 		\item Simulation parameters intialized from a file:
 			\begin{itemize}
 				\item Deck configuration
-					% deck image file to use, pixel_per_meter setting;
+					% deck image file to use, pixel_per_meter setting (scale);
 					% number of spawning and exiting zones,
 					% number of agents to spawn and exit capacities
 				\item Plotting options
@@ -106,28 +133,17 @@
 \end{frame}
 
 %Benedek
-\subsection{Forces}
-	% physical simlulation in continous space ==> Newtonian model with forces
+\subsection{Placement of New Agents}
 \begin{frame}
-	\frametitle{Forces}
+	\frametitle{Placement of New Agents}
 	\begin{itemize}
-		\item As described in Helbing's paper ``Simulating dynamical features
-		      of escape panic''
-		\item Three main forces act on agents:
-			\begin{itemize}
-				\item Desired direction
-					% agents try to achieve a velocity vector pointing in
-					% the direction of the nearest open exit
-				\item Repulsion \& friction between agents
-					% they don't want to get too close to each other,
-					% "social force";
-					% if they touch, they need to be separated physically and
-					% some friction appears
-				\item Repulsion \& friction from walls
-					% same as other agents, walls are avoided
-			\end{itemize}
+		\item Spawning zones as entering areas for agents
+			% each with a given number of total agents to spawn
+		\item In each step, remaining agents are tried to be placed
+		\item If spawning zones are too full, new agents can only appear in later steps
+		\item Nice model for steady inflow of agents
+			% e.g. stairs, agents coming from different floor
 	\end{itemize}
-	% TODO: sketch
 \end{frame}
 
 %Benedek
@@ -148,10 +164,36 @@
 					% outwards
 			\end{itemize}
 	\end{itemize}
+\end{frame}
+
+%Benedek
+\subsection{Forces}
+	% physical simlulation in continous space ==> Newtonian model with forces
+\begin{frame}
+	\frametitle{Forces}
+	\begin{itemize}
+		\item As described in Helbing's paper \mbox{``Simulating dynamical features
+		      of escape panic''}
+		\item Three main forces act on agents:
+			\begin{itemize}
+				\item Desired direction
+					% agents try to achieve a velocity vector pointing in
+					% the direction of the nearest open exit
+				\item Repulsion \& friction between agents
+					% they don't want to get too close to each other,
+					% "social force";
+					% if they touch, they need to be separated physically and
+					% some friction appears
+				\item Repulsion \& friction from walls
+					% same as other agents, walls are avoided
+			\end{itemize}
+		\item Motions calculated with Leap-Frog integration method
+			% with the forces known, agent motions are integrated with Leap-Frog
+	\end{itemize}
+
 	% TODO: sketch
 \end{frame}
 
-\section{Implementation}
 % TODO (not all):
 %       - restructure Model/Implementation in presentation
 %       - code reuse
@@ -163,12 +205,8 @@
 %       - plotting
 
 %Benedek
-\begin{frame}
-	\begin{itemize}
-		\item TODO
-	\end{itemize}
-\end{frame}
 
+%Johannes
 \section{Results}
 
 \subsection{Passenger Distribution}
