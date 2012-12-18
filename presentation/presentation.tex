@@ -9,7 +9,7 @@
 \setbeamercolor{framesource}{fg=black}
 \setbeamerfont{framesource}{size=\tiny}
 
-\newcommand{\source}[1]{\begin{textblock*}{4cm}(8.5cm,8.1cm)
+\newcommand{\source}[1]{\begin{textblock*}{4.5cm}(8.0cm,8.1cm)
 	\begin{beamercolorbox}[ht=0.5cm,right]{framesource}
 		\usebeamerfont{framesource}\usebeamercolor[fg]{framesource} Source: {#1}
 	\end{beamercolorbox}
@@ -50,7 +50,7 @@
 			\end{centering}
 		\end{column}
 	\end{columns}
-	\source{http://www.shipspotting.com, Picture taken by Roy Batty}
+	\source{\url{http://www.shipspotting.com}, Picture taken by Roy Batty}
 \end{frame}
 
 %Benedek
@@ -108,14 +108,14 @@
 			\end{center}
 		\end{column}
 	\end{columns}
-	\source{http://www.kreuzfahrtberater.de}
+	\source{\url{http://www.kreuzfahrtberater.de}}
 \end{frame}
 
 %Benedek
 \begin{frame}
 	\frametitle{Configuration File}
 	\begin{itemize}
-		\item Simulation parameters intialized from a file:
+		\item Simulation parameters initialized from a file:
 			\begin{itemize}
 				\item Deck configuration
 					% deck image file to use, pixel_per_meter setting (scale);
@@ -243,7 +243,7 @@
 	\begin{itemize}
 		\item Agents were stuck in walls
 		\begin{itemize}
-			\item Even the tiniest timesteps didn't help
+			\item Even the tiniest timesteps did not help
 		\end{itemize}
 		\item MATLAB does not behave as expected in batch mode
 		\begin{itemize}
@@ -258,7 +258,9 @@
 \end{frame}
 
 
+
 \section{Summary and Outlook}
+
 \begin{frame}
 	\frametitle{Some points to take away}
 	\begin{itemize}
@@ -268,6 +270,17 @@
 			\item There should be a heuristic to decide for a direction
 		\end{itemize}
 		\item Use the power of Open Source Software (OSS)!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{References}
+	\begin{itemize}
+		\item Simulating dynamical features of escape panic,\\ 
+		Dirk Helbing, Ill\'es Farkas, Tam\'as Vicsek\\
+		Nature, December 28, 2000
+		\item A Free Digital Society, Richard Stallman \\
+			\url{https://www1.ethz.ch/foss/news/rms}
 	\end{itemize}
 \end{frame}
 
